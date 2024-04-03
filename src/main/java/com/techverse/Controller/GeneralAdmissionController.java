@@ -228,7 +228,7 @@ public class GeneralAdmissionController {
  			        "</body></html>";
     		 
     		 
-    		 emailService.sendEmailWithAttachment(email, subject, body, birthCertificate,
+    		 emailService.sendEmailWithAttachment(schoolEmail, subject, body, birthCertificate,
     		             lastResult,
     		              parentAadhar,
     		             studentAadhar,

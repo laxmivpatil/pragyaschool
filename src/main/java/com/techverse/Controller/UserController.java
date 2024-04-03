@@ -73,7 +73,7 @@ public class UserController {
         String userBody = "<html><body>" +
             "<p>Dear " + userForm.getFullName() + ",</p>" +
             "<p>Thank you for contacting Pragya School. We have received your message and will get back to you soon.</p>" +
-            "<p>Here are the details of your message:</p>" +
+            "<p>Here are the details of your query:</p>" +
             "<ul>" +
             "<li>Subject: " + userForm.getSubject() + "</li>" +
             "<li>Message:</li>" +
