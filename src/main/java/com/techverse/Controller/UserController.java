@@ -47,9 +47,6 @@ public class UserController {
     @PostMapping("/create")
     public ResponseEntity<UserForm> createUserForm(@RequestBody UserForm userForm) {
         UserForm createdUserForm = userService.createUserForm(userForm);
-        
-        
-        
         String schoolSubject = "New Message from Contact Form";
         String schoolBody = "<html><body>" +
             "<p>Dear Pragya School Admissions Committee,</p>" +
