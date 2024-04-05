@@ -63,7 +63,7 @@ public class UserController {
             "<p>Thank you.</p>" +
             "</body></html>";
 
-        emailService.sendEmail(schoolEmail, schoolSubject, schoolBody);
+       // emailService.sendEmail(schoolEmail, schoolSubject, schoolBody);
         
         
         String userSubject = "Your Message to Pragya School";
@@ -80,7 +80,7 @@ public class UserController {
             "</body></html>";
         
         
-        emailService.sendEmail(userForm.getEmail(), userSubject, userBody);
+      //  emailService.sendEmail(userForm.getEmail(), userSubject, userBody);
 
         return new ResponseEntity<>(createdUserForm, HttpStatus.OK);
     }

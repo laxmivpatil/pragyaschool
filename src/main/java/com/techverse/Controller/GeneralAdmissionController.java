@@ -107,7 +107,7 @@ public class GeneralAdmissionController {
     			        mobileNo + "</p>" +
     			        "</body></html>";
 
-    			emailService.sendEmail(schoolEmail, subject, body);
+    		//	emailService.sendEmail(schoolEmail, subject, body);
     			
     			
     			
@@ -118,7 +118,7 @@ public class GeneralAdmissionController {
     		        "<p>Best regards,<br/>Pragya School Admissions Team</p>" +
     		        "</body></html>";
     		    
-    		    emailService.sendEmail(email, userSubject, userBody);
+    		  //  emailService.sendEmail(email, userSubject, userBody);
 
     		// emailService.sendSimpleEmail(email, "New Admission", firstName+lastName);
     		 return new ResponseEntity<>(generalAdmissionRepository.save(createdAdmission), HttpStatus.OK);
@@ -228,7 +228,7 @@ public class GeneralAdmissionController {
  			        "</body></html>";
     		 
     		 
-    		 emailService.sendEmailWithAttachment(schoolEmail, subject, body, birthCertificate,
+    		 /*emailService.sendEmailWithAttachment(schoolEmail, subject, body, birthCertificate,
     		             lastResult,
     		              parentAadhar,
     		             studentAadhar,
@@ -236,7 +236,7 @@ public class GeneralAdmissionController {
     		            cast,
     		           transferCertificate,
     		              profile,
-    		              sssmid);
+    		              sssmid);*/
     		 
     		 String userSubject = "Your Admission Enquiry";
  		    String userBody = "<html><body>" +
@@ -245,7 +245,7 @@ public class GeneralAdmissionController {
  		        "<p>Best regards,<br/>Pragya School Admissions Team</p>" +
  		        "</body></html>";
  		    
- 		    emailService.sendEmail(email, userSubject, userBody);
+ 		    //emailService.sendEmail(email, userSubject, userBody);
     		 
     		 
     		 
