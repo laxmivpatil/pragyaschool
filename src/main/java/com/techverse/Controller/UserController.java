@@ -76,7 +76,8 @@ public class UserController {
             "<li>Message:</li>" +
             "<p>" + userForm.getMessage()+ "</p>" +
             "</ul>" +
-            "<p>Best regards,<br/>Pragya School Admissions Team</p>" +
+            "<p>Best regards,<br/>Pragya School Admi"
+            + "ssions Team</p>" +
             "</body></html>";
         
         
