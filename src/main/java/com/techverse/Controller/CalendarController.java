@@ -45,7 +45,7 @@ public class CalendarController {
 	    }
 
 	    @PostMapping("/")
-	    public ResponseEntity<CommonResponse> createCalendar( @RequestPart(value = "location", required = false) String location, @RequestPart(value = "day", required = false) String day,
+	    public ResponseEntity<CommonResponse> createCalendar( @RequestPart(value = "eventName", required = false) String eventName ,@RequestPart(value = "location", required = false) String location, @RequestPart(value = "day", required = false) String day,
 	    		@RequestPart(value = "month", required = false) String month,@RequestPart(value = "year", required = false) String year,	@RequestPart(value = "image", required = false) MultipartFile image) {
 	    	String uniqueBlobName="";
 			String path="";
@@ -60,6 +60,7 @@ public class CalendarController {
 	    	 calendar.setLocation(location);
 	    	 calendar.setMonth(month);
 	    	 calendar.setYear(year);
+	    	 calendar.setEventName(eventName);
 	    	 Calendar createdCalendar = calendarService.createCalendar(calendar);
 	        
 	        CommonResponse response=new CommonResponse();

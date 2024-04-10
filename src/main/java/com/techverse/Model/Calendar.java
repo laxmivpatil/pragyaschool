@@ -14,6 +14,8 @@ public class Calendar {
 	
 	
 	private String location;
+	
+	private String eventName;
  	 	
 	private String image;
 	
@@ -22,6 +24,17 @@ public class Calendar {
 	private String month;
 	
 	private String year;
+	
+	
+	
+
+	public String getEventName() {
+		return eventName;
+	}
+
+	public void setEventName(String eventName) {
+		this.eventName = eventName;
+	}
 
 	public Long getId() {
 		return id;
