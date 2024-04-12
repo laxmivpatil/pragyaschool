@@ -113,6 +113,8 @@ public class GeneralAdmissionController {
 		  ResponseEntity<>(generalAdmissionRepository.save(createdAdmission),
 		  HttpStatus.OK);
 		  */
+		  
+		  generalAdmissionRepository.save(createdAdmission);
 		  return new
 				  ResponseEntity<>("Form Submitted successfully",
 				  HttpStatus.OK);
@@ -209,7 +211,7 @@ public class GeneralAdmissionController {
 		  
 		  //emailService.sendEmail(email, userSubject, userBody);
 		  
-		  
+		  generalAdmissionRepository.save(createdAdmission);
 		  
 		 /* return new
 		  ResponseEntity<>(generalAdmissionRepository.save(createdAdmission),
