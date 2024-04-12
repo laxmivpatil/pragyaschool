@@ -1,5 +1,6 @@
 package com.techverse.Controller;
 
+import java.time.Instant;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,10 +10,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.techverse.Model.GeneralAdmission;
 import com.techverse.Model.UserForm;
 import com.techverse.Response.ApiResponse;
 import com.techverse.Service.EmailService;
@@ -34,7 +37,40 @@ public class UserController {
 		 
 		return "welcome";
 	}
-	
+	@PostMapping("/test")
+	public String test()
+	{
+		 
+		return "welcome";
+	}
+	 @PostMapping("/testwithstring")
+	    public ResponseEntity<?> testwithstring( 
+	    		 @RequestParam("testString") String testString
+	    		 
+	             ) {
+	    	
+	    	 
+	    		 return new ResponseEntity<>(testString, HttpStatus.OK);
+	    		 
+	        	
+	    	 
+	        
+	    }
+	 @PostMapping("/testwithstringimg")
+	    public ResponseEntity<?> testwithstringimg( 
+	    		  @RequestPart(value = "testString", required = false) String testString,
+	      		@RequestPart(value = "img", required = false) MultipartFile img
+	             
+	    		 
+	             ) {
+	    	
+	    	 
+	    		 return new ResponseEntity<>(testString, HttpStatus.OK);
+	    		 
+	        	
+	    	 
+	        
+	    }
 	
  
     @GetMapping("/getAll")
