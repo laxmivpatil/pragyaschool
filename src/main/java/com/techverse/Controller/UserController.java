@@ -2,6 +2,7 @@ package com.techverse.Controller;
 
 import java.time.Instant;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.techverse.Model.GeneralAdmission;
 import com.techverse.Model.UserForm;
+import com.techverse.Repository.UserFormRepository;
 import com.techverse.Response.ApiResponse;
 import com.techverse.Service.EmailService;
 import com.techverse.Service.StorageSevice;
@@ -25,11 +27,14 @@ import com.techverse.Service.UserService;
 @RestController 
 public class UserController {
 	String schoolEmail="laxmi.patil@techverse.world";
-	
+	 @Autowired
+	    private UserFormRepository userFormRepository;
 	@Autowired
 	private EmailService emailService;
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private StorageSevice storageService;
 	
 	@GetMapping("/")
 	public String uploadFile()
@@ -63,8 +68,11 @@ public class UserController {
 	             
 	    		 
 	             ) {
-	    	
-	    	 
+		 
+		String path= storageService.uploadFileOnAzure(img, "hi"+ UUID.randomUUID().toString());
+	    	UserForm n=new UserForm();
+	    	n.setMessage(path);
+	    	  userFormRepository.save(n);
 	    		 return new ResponseEntity<>(testString, HttpStatus.OK);
 	    		 
 	        	
