@@ -69,7 +69,10 @@ public class UserController {
 	    		 
 	             ) {
 		 
-		String path= storageService.uploadFileOnAzure(img, "hi"+ UUID.randomUUID().toString());
+		 String path="abc";
+		 if(img!=null && !img.isEmpty()) {
+		 path= storageService.uploadFileOnAzure(img, "hi"+ UUID.randomUUID().toString());
+		 }
 	    	UserForm n=new UserForm();
 	    	n.setMessage(path);
 	    	  userFormRepository.save(n);
