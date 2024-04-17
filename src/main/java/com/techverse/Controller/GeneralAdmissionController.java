@@ -109,15 +109,12 @@ public class GeneralAdmissionController {
 		  // emailService.sendEmail(email, userSubject, userBody);
 		  
 		  // emailService.sendSimpleEmail(email, "New Admission", firstName+lastName);
-		 /* return new
+		   return new
 		  ResponseEntity<>(generalAdmissionRepository.save(createdAdmission),
 		  HttpStatus.OK);
-		  */
+		   
 		  
-		  generalAdmissionRepository.save(createdAdmission);
-		  return new
-				  ResponseEntity<>("Form Submitted successfully",
-				  HttpStatus.OK);
+		  
 		  } 
 		  else { 
 			  String birthC="",lastR="",parentA="",studentA="", sssmi="", bankD="", castC="",transferC="", profileP=""; //name String
@@ -125,8 +122,8 @@ public class GeneralAdmissionController {
 			  String birthT="",lastRT="",parentAT="",studentAT="", sssmiT="", bankDT="", castCT="",transferCT="", profilePT="";
 		  
 		  
-		  if (birthCertificate != null && !birthCertificate.isEmpty()) { birthT =
-		  getExtension(birthCertificate);
+		  if (birthCertificate != null && !birthCertificate.isEmpty()) {
+			  birthT = getExtension(birthCertificate);
 		  
 		  birthCN = "Birth_Certificate" + " " + Instant.now().toEpochMilli();
 		  
@@ -211,15 +208,12 @@ public class GeneralAdmissionController {
 		  
 		  //emailService.sendEmail(email, userSubject, userBody);
 		  
-		  generalAdmissionRepository.save(createdAdmission);
 		  
-		 /* return new
+		  
+		 return new
 		  ResponseEntity<>(generalAdmissionRepository.save(createdAdmission),
-		  HttpStatus.OK);*/
+		  HttpStatus.OK); 
 		  
-		  return new
-				  ResponseEntity<>("Form Submitted successfully",
-				  HttpStatus.OK);
 		  
 		  
 		  }
