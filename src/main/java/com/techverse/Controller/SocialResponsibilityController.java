@@ -29,8 +29,22 @@ public class SocialResponsibilityController {
 	@GetMapping("/")
 	public ResponseEntity<SocialResponsibilityResponse> getAllSocialResponsibility() 
 		{
+		
+		List<SocialResponsibility> socialResponsibilities = socialResponsibilityService.getAllsocialResponsibility();
+	    
+	    // Generate IDs for each social responsibility
+	    for (int i = 0; i < socialResponsibilities.size(); i++) {
+	        SocialResponsibility socialResponsibility = socialResponsibilities.get(i);
+	        
+	        // Assuming getId() returns the original ID of each social responsibility
+	        String formattedId = String.format("%02d", i + 1); // Formats ID as "01", "02", ...
+	        
+	        // Set the formatted ID to the social responsibility object
+	        socialResponsibility.setFormatedId(formattedId);
+	    }
+ 
 		SocialResponsibilityResponse response=new SocialResponsibilityResponse();
-		response.setResponsibilities(socialResponsibilityService.getAllsocialResponsibility());
+		response.setResponsibilities(socialResponsibilities);
 			
 			 return new ResponseEntity<>(response, HttpStatus.OK);
 		}

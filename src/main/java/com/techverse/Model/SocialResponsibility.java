@@ -18,10 +18,29 @@ public class SocialResponsibility {
 	
 	private String image;
 	
+	private String formatedId="";
+	
 	
 	 public SocialResponsibility() {
 		// TODO Auto-generated constructor stub
 	}
+	 
+	 
+	 
+
+	public String getFormatedId() {
+		return formatedId;
+	}
+
+
+
+
+	public void setFormatedId(String formatedId) {
+		this.formatedId = formatedId;
+	}
+
+
+
 
 	public Long getId() {
 		return id;
