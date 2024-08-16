@@ -42,11 +42,9 @@ public class SocialResponsibilityController {
 	        // Set the formatted ID to the social responsibility object
 	        socialResponsibility.setFormatedId(formattedId);
 	    }
- 
-		SocialResponsibilityResponse response=new SocialResponsibilityResponse();
+ 		SocialResponsibilityResponse response=new SocialResponsibilityResponse();
 		response.setResponsibilities(socialResponsibilities);
-			
-			 return new ResponseEntity<>(response, HttpStatus.OK);
+		return new ResponseEntity<>(response, HttpStatus.OK);
 		}
 	
 		@PostMapping("/")

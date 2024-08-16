@@ -21,6 +21,8 @@ public class Calendar {
 	
 	private String day;
 	
+	private String day2;
+	
 	private String month;
 	
 	private String year;
@@ -82,6 +84,14 @@ public class Calendar {
 
 	public void setYear(String year) {
 		this.year = year;
+	}
+
+	public String getDay2() {
+		return day2;
+	}
+
+	public void setDay2(String day2) {
+		this.day2 = day2;
 	}
 	
 	

@@ -132,10 +132,10 @@ public class GeneralAdmissionController {
 		  
 		  }
 		  
-		  if (lastResult != null && !lastResult.isEmpty()) { lastRT=
-		  getExtension(lastResult); lastRN= "Last_Year_Result" + " " +
-		  Instant.now().toEpochMilli(); lastR =
-		  storageService.uploadFileOnAzure(lastResult, lastRN+"."+lastRT); }
+		  if (lastResult != null && !lastResult.isEmpty()) { 
+			  lastRT= getExtension(lastResult);
+			  lastRN= "Last_Year_Result" + " " + Instant.now().toEpochMilli();
+			  lastR = storageService.uploadFileOnAzure(lastResult, lastRN+"."+lastRT); }
 		  
 		  if (parentAadhar != null && !parentAadhar.isEmpty()) { parentAT=
 		  getExtension(parentAadhar); parentAN = "Parent_Aadhar" + " " +

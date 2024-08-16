@@ -2,9 +2,11 @@ package com.techverse.Service;
 
 import java.io.File;
 import java.net.URL;
+import java.security.SecureRandom;
 import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.Properties;
+import java.util.Random;
 
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
@@ -36,7 +38,9 @@ import javax.mail.internet.MimeMessage;
 
 @Service
 public class EmailService {
-	
+	  private static final String DIGITS = "0123456789";
+	    private static final SecureRandom random = new SecureRandom();
+
 	 /*
 	  
 	 private String senderEmail="laxmipatil070295@gmail.com";
@@ -180,5 +184,15 @@ public class EmailService {
 	        attachmentBodyPart.setDataHandler(new DataHandler(source));
 	        attachmentBodyPart.setFileName(file.getOriginalFilename());
 	        return attachmentBodyPart;
+	    }
+	 
+	 
+	 public  String generateOTP(int length) {
+	        StringBuilder otp = new StringBuilder(length);
+	        for (int i = 0; i < length; i++) {
+	            int index = random.nextInt(DIGITS.length());
+	            otp.append(DIGITS.charAt(index));
+	        }
+	        return otp.toString();
 	    }
 }

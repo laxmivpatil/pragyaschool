@@ -18,4 +18,8 @@ public class CorsConfig implements WebMvcConfigurer {
                 .exposedHeaders("Referrer-Policy");
         
     }
+    
+    
+    
+     
 }
