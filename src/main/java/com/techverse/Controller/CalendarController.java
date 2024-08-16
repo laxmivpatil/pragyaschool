@@ -1,5 +1,6 @@
 package com.techverse.Controller;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -91,6 +92,11 @@ public class CalendarController {
 	    @GetMapping("/month")
 	    public ResponseEntity<CalendarResponse> getCalendarByYear(@RequestParam String month,@RequestParam String year) {
 	        List<Calendar> calendars = calendarService.getCalendarsByYear(month,year);
+	        
+	        // Sort the calendars by the "day" field
+	        calendars.sort(Comparator.comparingInt(calendar -> Integer.parseInt(calendar.getDay())));
+
+	        
 	        
 	        CalendarResponse response =new CalendarResponse();
 	        response.setCalendars(calendars);
