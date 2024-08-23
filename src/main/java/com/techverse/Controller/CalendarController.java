@@ -116,7 +116,7 @@ public class CalendarController {
 	    				String ext = originalFileName.substring(originalFileName.lastIndexOf('.') + 1);
 	    				 String path=storageService.uploadFileOnAzure(imageFile, uniqueBlobName+'.'+ext);
 	                 calendar.setImage(path); // Assuming the image is stored as a byte array in the Calendar entity
-	                 calendar.setDay2("");
+	               //  calendar.setDay2("");
 	                 return calendarService.createCalendar(calendar);
 	             } catch (Exception e) {
 	                 // Handle exception

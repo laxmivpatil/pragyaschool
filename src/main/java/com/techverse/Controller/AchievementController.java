@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestPart;
@@ -48,7 +49,12 @@ public class AchievementController {
 			
 			if(image!=null  && !image.isEmpty()) {
 			 uniqueBlobName = "achievemnet_"+year+"_"+UUID.randomUUID().toString();
-				  path=storageService.uploadFileOnAzure(image, uniqueBlobName);
+			 String originalFileName = image.getOriginalFilename();
+				String ext = originalFileName.substring(originalFileName.lastIndexOf('.') + 1);
+			 
+			 
+				  path=storageService.uploadFileOnAzure(image, uniqueBlobName+'.'+ext);
+		
 			}
 			Achievement achievement=new Achievement();
 	    	achievement.setImage(path);
@@ -74,4 +80,27 @@ public class AchievementController {
 	        return new ResponseEntity<>(response, HttpStatus.OK);
 	        
 	    }
+	    
+	    @PutMapping("/{id}/image")
+	    public ResponseEntity<CommonResponse> updateAchievementImage(
+	            @PathVariable("id") Long id, 
+	            @RequestPart("image") MultipartFile image) {
+	        
+	       
+
+	        // Generate a unique name for the new image
+	        String uniqueBlobName = "achievement_" + UUID.randomUUID().toString();
+	        String originalFileName = image.getOriginalFilename();
+	        String ext = originalFileName.substring(originalFileName.lastIndexOf('.') + 1);
+	        String path = storageService.uploadFileOnAzure(image, uniqueBlobName + '.' + ext);
+
+	        // Update the achievement image in the database
+	        Achievement updatedAchievement = achievementService.updateAchievementImage(id, path);
+	        CommonResponse response=new CommonResponse();
+			response.setMessage("Achievement updated Successfully");
+			
+			 return new ResponseEntity<>(response, HttpStatus.OK);
+	    }
+
+	    
 }

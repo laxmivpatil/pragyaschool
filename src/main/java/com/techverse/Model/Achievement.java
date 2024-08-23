@@ -17,6 +17,8 @@ public class Achievement {
 	
 	private String subtitle;
 	
+	private String competition_prizes=""; 
+	
 	private String image;
 	
 	private String year;
@@ -60,6 +62,14 @@ public class Achievement {
 
 	public void setYear(String year) {
 		this.year = year;
+	}
+
+	public String getCompetition_prizes() {
+		return competition_prizes;
+	}
+
+	public void setCompetition_prizes(String competition_prizes) {
+		this.competition_prizes = competition_prizes;
 	}
 	
 	

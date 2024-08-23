@@ -25,11 +25,18 @@ public class SocialResponsibilityService {
 		String uniqueBlobName="";
 		String path="";
 		
-		if(image!=null  && !image.isEmpty()) {
-		 uniqueBlobName = "SocialResponsibility_"+UUID.randomUUID().toString();
-			  path=storageService.uploadFileOnAzure(image, uniqueBlobName);
-		}
-		
+		 
+			 uniqueBlobName = "SocialResponsibility_" + UUID.randomUUID().toString().substring(0, 8);
+
+		 
+		 String originalFileName = image.getOriginalFilename();
+         String ext = originalFileName.substring(originalFileName.lastIndexOf('.') + 1);
+
+         path = storageService.uploadFileOnAzure(image, uniqueBlobName + '.' + ext);
+         
+		 
+			 
+		 
 		SocialResponsibility socialResponsibility=new SocialResponsibility();
 		socialResponsibility.setTitle(title);
 		socialResponsibility.setImage(path);

@@ -30,8 +30,12 @@ public class OurCampusService {
 		String path="";
 		
 		if(image!=null  && !image.isEmpty()) {
-		 uniqueBlobName = "SocialResponsibility_"+UUID.randomUUID().toString();
-			  path=storageService.uploadFileOnAzure(image, uniqueBlobName);
+		 uniqueBlobName = "OurCampus_"+UUID.randomUUID().toString();
+		 String originalFileName = image.getOriginalFilename();
+			String ext = originalFileName.substring(originalFileName.lastIndexOf('.') + 1);
+		 
+		 
+			  path=storageService.uploadFileOnAzure(image, uniqueBlobName+'.'+ext);
 		}
 		
 		OurCampus ourCampus=new OurCampus();
@@ -48,4 +52,21 @@ public class OurCampusService {
 		return ourCampusRepository.findAll();
 	}
 
+	 public OurCampus updateOurCampusImage(Long campusId, MultipartFile image) {
+	        OurCampus ourCampus = ourCampusRepository.findById(campusId)
+	            .orElseThrow(() -> new RuntimeException("OurCampus not found with id " + campusId));
+
+	        if (image != null && !image.isEmpty()) {
+	            String uniqueBlobName = "OurCampus_" + UUID.randomUUID().toString();
+	            String originalFileName = image.getOriginalFilename();
+	            String ext = originalFileName.substring(originalFileName.lastIndexOf('.') + 1);
+
+	            String path = storageService.uploadFileOnAzure(image, uniqueBlobName + '.' + ext);
+	            ourCampus.setImage(path);
+	        }
+
+	        return ourCampusRepository.save(ourCampus);
+	    }
+	
+	
 }

@@ -1,0 +1,795 @@
+{
+	"info": {
+		"_postman_id": "2cfb68b6-6177-4c6f-a96c-bd619d258e17",
+		"name": "C. Wegan Seller",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28505323",
+		"_collection_link": "https://gold-zodiac-385880.postman.co/workspace/New-Personal-Workspace~7ffa8013-590c-4f1a-aff5-449dad4bd309/collection/28505323-2cfb68b6-6177-4c6f-a96c-bd619d258e17?action=share&source=collection_link&creator=28505323"
+	},
+	"item": [
+		{
+			"name": "findemail and send otp",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:5010/auth/findemail?email=xyzabcdef90@gmail.com&role=seller",
+					"host": [
+						"localhost"
+					],
+					"port": "5010",
+					"path": [
+						"auth",
+						"findemail"
+					],
+					"query": [
+						{
+							"key": "email",
+							"value": "xyzabcdef90@gmail.com"
+						},
+						{
+							"key": "role",
+							"value": "seller"
+						}
+					]
+				},
+				"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+			},
+			"response": []
+		},
+		{
+			"name": "verify otp",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "localhost:5010/auth/verifyEmail?email=xyzabcdef90@gmail.com&otp=720894",
+					"host": [
+						"localhost"
+					],
+					"port": "5010",
+					"path": [
+						"auth",
+						"verifyEmail"
+					],
+					"query": [
+						{
+							"key": "email",
+							"value": "xyzabcdef90@gmail.com"
+						},
+						{
+							"key": "otp",
+							"value": "720894"
+						}
+					]
+				},
+				"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+			},
+			"response": []
+		},
+		{
+			"name": "seller Signup",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "laxmishinde1234",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "zyx@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "laxmi@123",
+							"type": "text"
+						},
+						{
+							"key": "mobileNo",
+							"value": "9860540681",
+							"type": "text"
+						},
+						{
+							"key": "role",
+							"value": "seller",
+							"type": "text"
+						},
+						{
+							"key": "companyType",
+							"value": "Food",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "Hello new ",
+							"type": "text"
+						},
+						{
+							"key": "businessMobile",
+							"value": "1234567890 ",
+							"type": "text"
+						},
+						{
+							"key": "gstNo",
+							"value": "gstno ",
+							"type": "text"
+						},
+						{
+							"key": "businessPanCard",
+							"value": "fqeps ",
+							"type": "text"
+						},
+						{
+							"key": "pickupAddress",
+							"value": "jalgaon ",
+							"type": "text"
+						},
+						{
+							"key": "state",
+							"value": "MH ",
+							"type": "text"
+						},
+						{
+							"key": "pincode",
+							"value": "425001 ",
+							"type": "text"
+						},
+						{
+							"key": "city",
+							"value": "jalgaon",
+							"type": "text"
+						},
+						{
+							"key": "sign",
+							"type": "file",
+							"src": "/C:/Users/LENOVO/Downloads/sign678.jpg"
+						},
+						{
+							"key": "companyName",
+							"value": "LaxmiFood",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:5010/auth/sellersignup",
+					"host": [
+						"localhost"
+					],
+					"port": "5010",
+					"path": [
+						"auth",
+						"sellersignup"
+					]
+				},
+				"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+			},
+			"response": []
+		},
+		{
+			"name": "seller Signup Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "laxmishinde1234",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "1234567890123abcc@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "laxmi@123",
+							"type": "text"
+						},
+						{
+							"key": "mobileNo",
+							"value": "9860540681",
+							"type": "text"
+						},
+						{
+							"key": "role",
+							"value": "seller",
+							"type": "text"
+						},
+						{
+							"key": "companyType",
+							"value": "Food",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "Hello new ",
+							"type": "text"
+						},
+						{
+							"key": "businessMobile",
+							"value": "1234567890 ",
+							"type": "text"
+						},
+						{
+							"key": "gstNo",
+							"value": "gstno ",
+							"type": "text"
+						},
+						{
+							"key": "businessPanCard",
+							"value": "fqeps ",
+							"type": "text"
+						},
+						{
+							"key": "pickupAddress",
+							"value": "jalgaon ",
+							"type": "text"
+						},
+						{
+							"key": "state",
+							"value": "MH ",
+							"type": "text"
+						},
+						{
+							"key": "pincode",
+							"value": "425001 ",
+							"type": "text"
+						},
+						{
+							"key": "city",
+							"value": "jalgaon",
+							"type": "text"
+						},
+						{
+							"key": "sign",
+							"type": "file",
+							"src": "/C:/Users/LENOVO/Downloads/85.1 Starling.jpg"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:5010/auth/sellersignup",
+					"host": [
+						"localhost"
+					],
+					"port": "5010",
+					"path": [
+						"auth",
+						"sellersignup"
+					]
+				},
+				"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+			},
+			"response": []
+		},
+		{
+			"name": "seller Signin",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\":\"xyzabc@gmail.com\",\n    \"password\":\"laxmi@123\",\n    \"role\":\"seller\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5010/auth/signin",
+					"host": [
+						"localhost"
+					],
+					"port": "5010",
+					"path": [
+						"auth",
+						"signin"
+					]
+				},
+				"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+			},
+			"response": []
+		},
+		{
+			"name": "get all Products by seller",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI4NCIsImlhdCI6MTcyMTIxNzk3MSwiZXhwIjoxNzIxODIyNzcxfQ.mPW9reaa7Im5SKWCJzRBodqP4zYouhRJYT5S6VYOk_VP29EiW9enkkuPJZTg8o9tjDm7A2YzNU7ctkwubgZZhA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:5010/admin/products/",
+					"host": [
+						"localhost"
+					],
+					"port": "5010",
+					"path": [
+						"admin",
+						"products",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get pending orders",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI4NCIsImlhdCI6MTcyMTkxNDIwNywiZXhwIjoxNzIyNTE5MDA3fQ.OO51r9gWW2_C6zrNe1Kod5gj4Bq6FpC_Qtd5-y5jx77ss76WEbYjhW0-fH2ziGrqBJ6XlzOUKeRdfJuA9rtjqg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:5010/api/admin/orders/pending",
+					"host": [
+						"localhost"
+					],
+					"port": "5010",
+					"path": [
+						"api",
+						"admin",
+						"orders",
+						"pending"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get pending orders Copy",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI4NCIsImlhdCI6MTcyMTkxNDIwNywiZXhwIjoxNzIyNTE5MDA3fQ.OO51r9gWW2_C6zrNe1Kod5gj4Bq6FpC_Qtd5-y5jx77ss76WEbYjhW0-fH2ziGrqBJ6XlzOUKeRdfJuA9rtjqg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:5010/api/admin/orders/",
+					"host": [
+						"localhost"
+					],
+					"port": "5010",
+					"path": [
+						"api",
+						"admin",
+						"orders",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Product",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI1NyIsImlhdCI6MTcyMzc5MzEyNywiZXhwIjoxNzI0Mzk3OTI3fQ.x1vpoUa3x9D3iYoV5uaZYNbrTrtOgA4FdmRJ3j2tY4crmgulLb5xaxMuTwHb3PyGlY3pORgK6bjdG3xExL69aw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "categoryId",
+							"value": "3",
+							"type": "text"
+						},
+						{
+							"key": "title",
+							"value": "Walnuts fresh",
+							"type": "text"
+						},
+						{
+							"key": "site",
+							"value": "vegan",
+							"type": "text"
+						},
+						{
+							"key": "quantity",
+							"value": "10",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "This is a wonderful black vest, which is well suited for parties",
+							"type": "text"
+						},
+						{
+							"key": "product_tags",
+							"value": "Fresh Item",
+							"type": "text"
+						},
+						{
+							"key": "policy",
+							"value": "1 day use",
+							"type": "text"
+						},
+						{
+							"key": "seller_price",
+							"value": "200",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "sgst",
+							"value": "5",
+							"type": "text"
+						},
+						{
+							"key": "igst",
+							"value": "5",
+							"type": "text"
+						},
+						{
+							"key": "weight",
+							"value": "50",
+							"type": "text"
+						},
+						{
+							"key": "base_price",
+							"value": "100",
+							"type": "text"
+						},
+						{
+							"key": "discount_per",
+							"value": "0",
+							"type": "text"
+						},
+						{
+							"key": "discount",
+							"value": "true",
+							"type": "text"
+						},
+						{
+							"key": "discount_type",
+							"value": "0 per",
+							"type": "text"
+						},
+						{
+							"key": "discount_price",
+							"value": "100",
+							"type": "text"
+						},
+						{
+							"key": "igst_price",
+							"value": "5",
+							"type": "text"
+						},
+						{
+							"key": "sgst_price",
+							"value": "5",
+							"type": "text"
+						},
+						{
+							"key": "final_price",
+							"value": "110",
+							"type": "text"
+						},
+						{
+							"key": "imageUrl1",
+							"type": "file",
+							"src": "/C:/Users/LENOVO/Downloads/Image 272.png",
+							"disabled": true
+						},
+						{
+							"key": "imageUrl2",
+							"type": "file",
+							"src": [],
+							"disabled": true
+						},
+						{
+							"key": "imageUrl3",
+							"type": "file",
+							"src": [],
+							"disabled": true
+						},
+						{
+							"key": "imageUrl4",
+							"type": "file",
+							"src": [],
+							"disabled": true
+						},
+						{
+							"key": "imageUrl5",
+							"type": "file",
+							"src": [],
+							"disabled": true
+						},
+						{
+							"key": "imageUrl6",
+							"type": "file",
+							"src": [],
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:5010/admin/products/create",
+					"host": [
+						"localhost"
+					],
+					"port": "5010",
+					"path": [
+						"admin",
+						"products",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get category details",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI1NyIsImlhdCI6MTcyMzEyNDY3MywiZXhwIjoxNzIzNzI5NDczfQ.AQ0CILCcAM7LYt7qVqgN_ZwfhS9KakSJ1jo6fR0Arr6gi_kzwk7Pie2ygs46CHTeBNOfnPbPZcMVV35nnZ4s4Q",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:5010/categories/details/1",
+					"host": [
+						"localhost"
+					],
+					"port": "5010",
+					"path": [
+						"categories",
+						"details",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Product",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI5OCIsImlhdCI6MTcyMTcxNzA3MywiZXhwIjoxNzIyMzIxODczfQ.1cF6MxWnfeskSD5I31lWPGKdDZTYkrqRrslMGgy6EecGXsZN8WkzZkdJnZ-uQR2_ZOTDOMF2bBNrBBcLbfKE7A",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:5010/admin/products/delete?productId=123",
+					"host": [
+						"localhost"
+					],
+					"port": "5010",
+					"path": [
+						"admin",
+						"products",
+						"delete"
+					],
+					"query": [
+						{
+							"key": "productId",
+							"value": "123"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update Product",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI5OCIsImlhdCI6MTcyMTcxNzA3MywiZXhwIjoxNzIyMzIxODczfQ.1cF6MxWnfeskSD5I31lWPGKdDZTYkrqRrslMGgy6EecGXsZN8WkzZkdJnZ-uQR2_ZOTDOMF2bBNrBBcLbfKE7A",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"quantity\":\"25\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5010/admin/products/update?productId=95",
+					"host": [
+						"localhost"
+					],
+					"port": "5010",
+					"path": [
+						"admin",
+						"products",
+						"update"
+					],
+					"query": [
+						{
+							"key": "productId",
+							"value": "95"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "razorpay test",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI1NyIsImlhdCI6MTcyMzEwNTg0NiwiZXhwIjoxNzIzNzEwNjQ2fQ.2q7Jb6BxuRffa78LEowazZcicGpRlDU79W7sQ2iCJjNROvwT-Jls_8msjneQ7PXNh_vo2I5qZMSBjWDgqUInqA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:5010/api/orders/verifypayment/gh",
+					"host": [
+						"localhost"
+					],
+					"port": "5010",
+					"path": [
+						"api",
+						"orders",
+						"verifypayment",
+						"gh"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
