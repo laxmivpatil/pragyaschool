@@ -21,6 +21,9 @@ public class UserForm {
 	private String message;
 	
 	private String subject;
+	 private String city = "";
+	    
+	    private String state = "";
 
 	public Long getId() {
 		return id;
@@ -68,6 +71,22 @@ public class UserForm {
 
 	public void setSubject(String subject) {
 		this.subject = subject;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
 	}
 	
 	

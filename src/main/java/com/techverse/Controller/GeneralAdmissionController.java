@@ -10,6 +10,7 @@ import com.techverse.Model.GeneralAdmission;
 import com.techverse.Repository.GeneralAdmissionRepository;
 import com.techverse.Response.GeneralAdmissionResponse;
 import com.techverse.Service.EmailService;
+import com.techverse.Service.EmailService1;
 import com.techverse.Service.GeneralAdmissionService;
 import com.techverse.Service.StorageSevice;
 
@@ -27,6 +28,8 @@ public class GeneralAdmissionController {
 	private StorageSevice storageService;
 	@Autowired
 	private EmailService emailService;
+	@Autowired
+	private EmailService1 emailService1;
 	@Autowired
 	private GeneralAdmissionService generalAdmissionService;
 	String schoolEmail = "laxmi.patil@techverse.world";
@@ -96,7 +99,7 @@ public class GeneralAdmissionController {
 		  "<p>Best regards,<br/>" + firstName + " " + lastName + "<br/>" + mobileNo +
 		  "</p>" + "</body></html>";
 		  
-		  // emailService.sendEmail(schoolEmail, subject, body);
+		  emailService1.sendEmail(schoolEmail, subject, body);
 		  
 		  
 		  
@@ -106,7 +109,7 @@ public class GeneralAdmissionController {
 		  + "<p>Best regards,<br/>Pragya School Admissions Team</p>" +
 		  "</body></html>";
 		  
-		  // emailService.sendEmail(email, userSubject, userBody);
+		    emailService1.sendEmail(email, userSubject, userBody);
 		  
 		  // emailService.sendSimpleEmail(email, "New Admission", firstName+lastName);
 		   return new
@@ -206,7 +209,7 @@ public class GeneralAdmissionController {
 		  + "<p>Best regards,<br/>Pragya School Admissions Team</p>" +
 		  "</body></html>";
 		  
-		  //emailService.sendEmail(email, userSubject, userBody);
+		  emailService1.sendEmail(email, userSubject, userBody);
 		  
 		  
 		  

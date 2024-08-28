@@ -1,3 +1,5 @@
+ 
+
 package com.techverse.Service;
 
 import java.io.File;
@@ -38,7 +40,7 @@ import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
 @Service
-public class EmailService {
+public class EmailService1 {
 	  private static final String DIGITS = "0123456789";
 	    private static final SecureRandom random = new SecureRandom();
 	    //senderEmail=test@pragyagirlsschool.com
@@ -46,12 +48,12 @@ public class EmailService {
 //  host=  mail.pragyagirlsschool.com
 	 
 	
-	    private String senderEmail="laxmipatil070295@gmail.com";
+	    private String senderEmail="test@pragyagirlsschool.com";
 		
 
-	     private String senderPassword= "puokarvnqseapgtl";
+	     private String senderPassword= "pragyagirlsschool1*";
 	
-	     private String host= "smtp.gmail.com";
+	     private String host= "mail.pragyagirlsschool.com";
 	
 	/*
 	private String senderEmail="laxmi.patil@techverse.world";
@@ -62,7 +64,7 @@ public class EmailService {
      private String host= "smtp.zoho.in";
 	
 	 */
-     int port=587;
+     int port=465;
      
      @Autowired
      private JavaMailSender emailSender;
@@ -76,7 +78,10 @@ public class EmailService {
         props.put("mail.smtp.port", port);
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
-
+        props.put("mail.smtp.starttls.required", "true");
+        props.put("mail.smtp.ssl.enable", "true");
+        props.put("mail.smtp.ssl.trust", "mail.pragyagirlsschool.com");
+        props.put("mail.debug", "true");
         // Create a mail session with the specified properties
         Session session = Session.getInstance(props, new Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {

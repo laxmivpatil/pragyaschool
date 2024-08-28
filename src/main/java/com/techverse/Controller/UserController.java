@@ -21,6 +21,7 @@ import com.techverse.Model.UserForm;
 import com.techverse.Repository.UserFormRepository;
 import com.techverse.Response.ApiResponse;
 import com.techverse.Service.EmailService;
+import com.techverse.Service.EmailService1;
 import com.techverse.Service.StorageSevice;
 import com.techverse.Service.UserService;
 
@@ -32,6 +33,8 @@ public class UserController {
 	@Autowired
 	private EmailService emailService;
 	@Autowired
+	private EmailService1 emailService1;
+	@Autowired
 	private UserService userService;
 	@Autowired
 	private StorageSevice storageService;
@@ -39,13 +42,36 @@ public class UserController {
 	@GetMapping("/")
 	public String uploadFile()
 	{
-		 
+ 	String recipientEmail = "laxmi.patil@techverse.world";
+		String emailSubject = "Welcome to Our Service";
+		String emailBody = "<h2>Welcome to Our Service</h2><p>We are glad to have you with us.</p>";
+		String imagePath = "src/main/resources/static/images/logo.png"; // Example: "src/main/resources/static/images/logo.png"
+
+		boolean result = emailService.sendEmail1(recipientEmail, emailSubject, emailBody, imagePath);
+
+		if (result) {
+		    System.out.println("Email sent successfully.");
+		} else {
+		    System.out.println("Failed to send email.");
+		}
 		return "welcome";
 	}
 	@PostMapping("/test")
 	public String test()
-	{
+	{ 
+		String recipientEmail = "laxmipatil070295@gmail.com";
+		//String recipientEmail = "maneomkar94@gmail.com";
+		//String recipientEmail = "bhaktithorat20@gmail.com";
+		//String recipientEmail ="keerthanams@techverse.world";
+		//String recipientEmail ="keerthu.m230@gmail.com";
+		
+		//String recipientEmail="test@pragyagirlsschool.com";
+	//String recipientEmail="laxmi.patil@techverse.world";
+		String emailSubject = "Welcome to Our Service";
+		String emailBody = "<h2>Welcome to Our Service</h2><p>We are glad to have you with us.</p>";
 		 
+
+		emailService1.sendEmail(recipientEmail, emailSubject, emailBody);
 		return "welcome";
 	}
 	 @PostMapping("/testwithstring")
@@ -91,6 +117,10 @@ public class UserController {
         return new ResponseEntity<>(apiResponse, HttpStatus.OK);
     }
 
+    
+    
+    
+    /*
     @PostMapping("/create")
     public ResponseEntity<UserForm> createUserForm(@RequestBody UserForm userForm) {
         UserForm createdUserForm = userService.createUserForm(userForm);
@@ -129,6 +159,71 @@ public class UserController {
         
         
       //  emailService.sendEmail(userForm.getEmail(), userSubject, userBody);
+
+        return new ResponseEntity<>(createdUserForm, HttpStatus.OK);
+    }
+*/
+    @PostMapping("/create")
+    public ResponseEntity<UserForm> createUserForm(@RequestBody UserForm userForm) {
+        UserForm createdUserForm = userService.createUserForm(userForm);
+        String schoolSubject = "New Message from Contact Form";
+        
+        StringBuilder schoolBodyBuilder = new StringBuilder();
+        schoolBodyBuilder.append("<html><body>")
+            .append("<p>Dear Pragya School Admissions Committee,</p>")
+            .append("<p>A new message has been received through the contact form:</p>")
+            .append("<ul>")
+            .append("<li>Full Name: ").append(userForm.getFullName()).append("</li>")
+            .append("<li>Email: ").append(userForm.getEmail()).append("</li>")
+            .append("<li>Phone Number: ").append(userForm.getPhoneNumber()).append("</li>")
+            .append("<li>Subject: ").append(userForm.getSubject()).append("</li>")
+            .append("<li>Message:</li>")
+            .append("<p>").append(userForm.getMessage()).append("</p>");
+        
+        // Add city and state if provided
+        if (!userForm.getCity().isEmpty()) {
+            schoolBodyBuilder.append("<li>City: ").append(userForm.getCity()).append("</li>");
+        }
+        if (!userForm.getState().isEmpty()) {
+            schoolBodyBuilder.append("<li>State: ").append(userForm.getState()).append("</li>");
+        }
+        
+        schoolBodyBuilder.append("</ul>")
+            .append("<p>Please review and respond accordingly.</p>")
+            .append("<p>Thank you.</p>")
+            .append("</body></html>");
+        
+        String schoolBody = schoolBodyBuilder.toString();
+        // emailService.sendEmail(schoolEmail, schoolSubject, schoolBody);
+
+        String userSubject = "Your Message to Pragya School";
+        
+        StringBuilder userBodyBuilder = new StringBuilder();
+        userBodyBuilder.append("<html><body>")
+            .append("<p>Dear ").append(userForm.getFullName()).append(",</p>")
+            .append("<p>Thank you for contacting Pragya School. We have received your message and will get back to you soon.</p>")
+            .append("<p>Here are the details of your query:</p>")
+            .append("<ul>")
+            .append("<li>Subject: ").append(userForm.getSubject()).append("</li>")
+            .append("<li>Message:</li>")
+            .append("<p>").append(userForm.getMessage()).append("</p>");
+        
+        // Add city and state if provided
+        if (!userForm.getCity().isEmpty()) {
+            userBodyBuilder.append("<li>City: ").append(userForm.getCity()).append("</li>");
+        }
+        if (!userForm.getState().isEmpty()) {
+            userBodyBuilder.append("<li>State: ").append(userForm.getState()).append("</li>");
+        }
+        
+        userBodyBuilder.append("</ul>")
+            .append("<p>Best regards,<br/>Pragya School Admissions Team</p>")
+            .append("</body></html>");
+        
+        String userBody = userBodyBuilder.toString();
+        
+        System.out.println(userForm.getEmail()+" "+userSubject+" "+userBody);
+         emailService1.sendEmail(userForm.getEmail(), userSubject, userBody);
 
         return new ResponseEntity<>(createdUserForm, HttpStatus.OK);
     }
