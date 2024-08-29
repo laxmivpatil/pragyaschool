@@ -32,7 +32,7 @@ public class GeneralAdmissionController {
 	private EmailService1 emailService1;
 	@Autowired
 	private GeneralAdmissionService generalAdmissionService;
-	String schoolEmail = "laxmi.patil@techverse.world";
+	String schoolEmail = "admissionenquiry@pragyagirlsschool.com";
 
 	@Autowired
 	private GeneralAdmissionRepository generalAdmissionRepository;
@@ -199,7 +199,7 @@ public class GeneralAdmissionController {
 		  "</p>" + "</body></html>";
 		  
 		  
-		  emailService.sendEmailWithAttachment(schoolEmail, subject, body,
+		  emailService1.sendEmailWithAttachment(schoolEmail, subject, body,
 		  birthCertificate, lastResult, parentAadhar, studentAadhar, bankDoc, cast,
 		  transferCertificate, profile, sssmid);
 		  

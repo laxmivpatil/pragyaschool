@@ -27,7 +27,7 @@ import com.techverse.Service.UserService;
 
 @RestController 
 public class UserController {
-	String schoolEmail="laxmi.patil@techverse.world";
+	String schoolEmail="contactus@pragyagirlsschool.com";
 	 @Autowired
 	    private UserFormRepository userFormRepository;
 	@Autowired
@@ -194,7 +194,7 @@ public class UserController {
             .append("</body></html>");
         
         String schoolBody = schoolBodyBuilder.toString();
-        // emailService.sendEmail(schoolEmail, schoolSubject, schoolBody);
+         emailService1.sendEmail(schoolEmail, schoolSubject, schoolBody);
 
         String userSubject = "Your Message to Pragya School";
         

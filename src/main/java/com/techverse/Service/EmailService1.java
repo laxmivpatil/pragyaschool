@@ -178,9 +178,13 @@ public class EmailService1 {
             MultipartFile sssmid) {
 	    Properties props = new Properties();
 	    props.put("mail.smtp.host", host);
-	    props.put("mail.smtp.port", port);
-	    props.put("mail.smtp.auth", "true");
-	    props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.port", port);
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.starttls.required", "true");
+        props.put("mail.smtp.ssl.enable", "true");
+        props.put("mail.smtp.ssl.trust", "mail.pragyagirlsschool.com");
+        props.put("mail.debug", "true");
 
 	    // Create a mail session with the specified properties
 	    Session session = Session.getInstance(props, new Authenticator() {
