@@ -88,8 +88,7 @@ public class GeneralAdmissionController {
 		  "<p>Dear Pragya School Admissions Committee,</p>" +
 		  "<p>We are pleased to inform you that a new admission request has been received for the academic year 2024.</p>"
 		  + "<p>Details of the applicant are as follows:</p>" + "<ul>" +
-		  "<li>Full Name: " + firstName + " " + lastName + "</li>" + "<li>Gender: " +
-		  gender + "</li>" + "<li>Date of Birth: " + dateOfBirth + "</li>" +
+		  "<li>Full Name: " + firstName + " " + lastName + "</li>" + "<li>Date of Birth: " + dateOfBirth + "</li>" +
 		  "<li>Class Applying For: " + admissionClass + "</li>" + "<li>Father's Name: "
 		  + fatherName + "</li>" + "<li>Mother's Name: " + motherName + "</li>" +
 		  "<li>Mobile Number: " + mobileNo + "</li>" + "<li>Email Address: " + email +
@@ -182,8 +181,7 @@ public class GeneralAdmissionController {
 		  "<p>Dear Pragya School Admissions Committee,</p>" +
 		  "<p>We are pleased to inform you that a new admission request has been received for the academic year 2024.</p>"
 		  + "<p>Details of the applicant are as follows:</p>" + "<ul>" +
-		  "<li>Full Name: " + firstName + " " + lastName + "</li>" + "<li>Gender: " +
-		  gender + "</li>" + "<li>Date of Birth: " + dateOfBirth + "</li>" +
+		  "<li>Full Name: " + firstName + " " + lastName + "</li>"  + "<li>Date of Birth: " + dateOfBirth + "</li>" +
 		  "<li>Class Applying For: " + admissionClass + "</li>" + "<li>Father's Name: "
 		  + fatherName + "</li>" + "<li>Mother's Name: " + motherName + "</li>" +
 		  "<li>Mobile Number: " + mobileNo + "</li>" + "<li>Email Address: " + email +

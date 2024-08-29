@@ -60,7 +60,7 @@ public class GeneralAdmission {
 		this.mobileNo = mobileNo;
 		this.email = email;
 		this.type = type;
-		PEN = pEN;
+		this.PEN = pEN;
 		this.birthCertificate = birthCertificate;
 		this.lastResult = lastResult;
 		this.parentAadhar = parentAadhar;
@@ -87,12 +87,12 @@ public class GeneralAdmission {
 		this.mobileNo = mobileNo;
 		this.email = email;
 		this.type = type;
-		PEN = pEN;
+		this.PEN = pEN;
 		this.birthCertificate = birthCertificate;
 		this.lastResult = lastResult;
 		this.parentAadhar = parentAadhar;
 		this.studentAadhar = studentAadhar;
-		SSSMID = sSSMID;
+		this.SSSMID = sSSMID;
 		this.bankDoc = bankDoc;
 		this.cast = cast;
 		this.transferCertificate = transferCertificate;
