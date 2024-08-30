@@ -102,7 +102,8 @@ public class UserController {
             .append("<li>Email: ").append(userForm.getEmail()).append("</li>")
             .append("<li>Phone Number: ").append(userForm.getPhoneNumber()).append("</li>")
             .append("<li>Subject: ").append(userForm.getSubject()).append("</li>")
-            .append("<li>Message:</li>")
+            .append("<li>Message: ").append(userForm.getMessage()).append("</li>")
+          //  .append("<li>Message:</li>")
             .append("<p>").append(userForm.getMessage()).append("</p>");
         
         // Add city and state if provided
@@ -130,7 +131,8 @@ public class UserController {
             .append("<p>Here are the details of your query:</p>")
             .append("<ul>")
             .append("<li>Subject: ").append(userForm.getSubject()).append("</li>")
-            .append("<li>Message:</li>")
+            .append("<li>Message: ").append(userForm.getMessage()).append("</li>")
+          //  .append("<li>Message:</li>")
             .append("<p>").append(userForm.getMessage()).append("</p>");
         
         // Add city and state if provided

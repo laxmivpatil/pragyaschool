@@ -208,19 +208,8 @@ public class GeneralAdmissionController {
 		  "</body></html>";
 		  
 		  emailService1.sendEmail(email, userSubject, userBody);
-		  
-		  
-		  
-		 return new
-		  ResponseEntity<>(generalAdmissionRepository.save(createdAdmission),
-		  HttpStatus.OK); 
-		  
-		  
-		  
+		 return new ResponseEntity<>(generalAdmissionRepository.save(createdAdmission),HttpStatus.OK); 
 		  }
-		 
-		
-	
 	}
 
 	public String getExtension(MultipartFile file) {
