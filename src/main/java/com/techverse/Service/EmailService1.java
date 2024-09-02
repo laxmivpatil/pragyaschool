@@ -81,7 +81,7 @@ public class EmailService1 {
         props.put("mail.smtp.starttls.required", "true");
         props.put("mail.smtp.ssl.enable", "true");
         props.put("mail.smtp.ssl.trust", "mail.pragyagirlsschool.com");
-        props.put("mail.debug", "true");
+        //props.put("mail.debug", "true");
         // Create a mail session with the specified properties
         Session session = Session.getInstance(props, new Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
@@ -184,7 +184,7 @@ public class EmailService1 {
         props.put("mail.smtp.starttls.required", "true");
         props.put("mail.smtp.ssl.enable", "true");
         props.put("mail.smtp.ssl.trust", "mail.pragyagirlsschool.com");
-        props.put("mail.debug", "true");
+     //   props.put("mail.debug", "true");
 
 	    // Create a mail session with the specified properties
 	    Session session = Session.getInstance(props, new Authenticator() {

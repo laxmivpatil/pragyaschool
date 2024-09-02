@@ -7,6 +7,7 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -120,7 +121,6 @@ public class UserController {
             .append("</body></html>");
         
         String schoolBody = schoolBodyBuilder.toString();
-         emailService1.sendEmail(schoolEmail, schoolSubject, schoolBody);
 
         String userSubject = "Your Message to Pragya School";
         
@@ -148,11 +148,17 @@ public class UserController {
             .append("</body></html>");
         
         String userBody = userBodyBuilder.toString();
-        
-        System.out.println(userForm.getEmail()+" "+userSubject+" "+userBody);
-         emailService1.sendEmail(userForm.getEmail(), userSubject, userBody);
 
+      //  emailService1.sendEmail(schoolEmail, schoolSubject, schoolBody);
+        //  emailService1.sendEmail(userForm.getEmail(), userSubject, userBody);
+        sendEmailAsync(schoolEmail, schoolSubject, schoolBody);
+        sendEmailAsync(userForm.getEmail(), userSubject, userBody);
         return new ResponseEntity<>(createdUserForm, HttpStatus.OK);
     }
+    @Async
+    public void sendEmailAsync(String to, String subject, String body) {
+        emailService1.sendEmail(to, subject, body);
+    }
+
 
 }
