@@ -1,0 +1,18 @@
+<!-- src/main/resources/templates/schoolEmailTemplate.html -->
+<html>
+<body>
+    <p>Dear Pragya School Admissions Committee,</p>
+    <p>A new message has been received through the contact form:</p>
+    <ul>
+        <li>Full Name: <span th:text="${fullName}"></span></li>
+        <li>Email: <span th:text="${email}"></span></li>
+        <li>Phone Number: <span th:text="${phoneNumber}"></span></li>
+        <li>Subject: <span th:text="${subject}"></span></li>
+        <li>Message: <p th:text="${message}"></p></li>
+        <li th:if="${city} != null">City: <span th:text="${city}"></span></li>
+        <li th:if="${state} != null">State: <span th:text="${state}"></span></li>
+    </ul>
+    <p>Please review and respond accordingly.</p>
+    <p>Thank you.</p>
+</body>
+</html>

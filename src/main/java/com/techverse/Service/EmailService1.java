@@ -6,6 +6,7 @@ import java.io.File;
 import java.net.URL;
 import java.security.SecureRandom;
 import java.time.LocalDateTime;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Properties;
 import java.util.Random;
@@ -14,6 +15,7 @@ import javax.activation.DataHandler;
 import javax.activation.DataSource;
 import javax.activation.FileDataSource;
 import javax.activation.URLDataSource;
+import javax.annotation.PostConstruct;
 import javax.mail.Authenticator;
 import javax.mail.BodyPart;
 import javax.mail.Message;
@@ -29,11 +31,14 @@ import javax.mail.internet.MimeMultipart;
 import javax.mail.util.ByteArrayDataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
+import org.thymeleaf.context.Context;
+import org.thymeleaf.spring5.SpringTemplateEngine;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import javax.mail.MessagingException;
@@ -43,34 +48,101 @@ import javax.mail.internet.MimeMessage;
 public class EmailService1 {
 	  private static final String DIGITS = "0123456789";
 	    private static final SecureRandom random = new SecureRandom();
-	    //senderEmail=test@pragyagirlsschool.com
-//senderPassword=pragyagirlsschool1*
-//  host=  mail.pragyagirlsschool.com
-	 
-	
-	    private String senderEmail="test@pragyagirlsschool.com";
-		
+	    private Session session;
 
-	     private String senderPassword= "pragyagirlsschool1*";
-	
-	     private String host= "mail.pragyagirlsschool.com";
-	
-	/*
-	private String senderEmail="laxmi.patil@techverse.world";
-	
 	 
-    private String senderPassword= "9vYXuAf9ptj7";
-	
-     private String host= "smtp.zoho.in";
-	
-	 */
-     int port=465;
+	    @Value("${mail.smtp.host}")
+	    private String host;
+
+	    @Value("${mail.smtp.port}")
+	    private String port;
+
+	    @Value("${mail.smtp.user}")
+	    private String senderEmail;
+
+	    @Value("${mail.smtp.password}")
+	    private String senderPassword;
+
      
      @Autowired
      private JavaMailSender emailSender;
 
+     @Autowired
+     private SpringTemplateEngine templateEngine;
+
+     public String generateEmailContent(String templateName, Map<String, Object> variables) {
+         Context context = new Context();
+         context.setVariables(variables);
+         return templateEngine.process(templateName, context);
+     }
      
-	
+     
+    
+     @PostConstruct
+     private void initializeSession() {
+         Properties props = new Properties();
+         props.put("mail.smtp.host", host);
+         props.put("mail.smtp.port", port);
+         props.put("mail.smtp.auth", "true");
+         props.put("mail.smtp.starttls.enable", "true");
+         props.put("mail.smtp.starttls.required", "true");
+         props.put("mail.smtp.ssl.enable", "true");
+         props.put("mail.smtp.ssl.trust", host);
+
+         this.session = Session.getInstance(props, new Authenticator() {
+             @Override
+             protected PasswordAuthentication getPasswordAuthentication() {
+                 return new PasswordAuthentication(senderEmail, senderPassword);
+             }
+         });
+     }
+     //using java Mail sender 
+     public boolean sendEmail2(String recipientEmail, String emailSubject, String emailBody) {
+         try {
+             MimeMessage mimeMessage = emailSender.createMimeMessage();
+             MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
+             
+             helper.setFrom(senderEmail); // You can use the same as senderEmail if required
+             helper.setTo(recipientEmail);
+             helper.setSubject(emailSubject);
+             helper.setText(emailBody, true); // true indicates HTML content
+
+             emailSender.send(mimeMessage);
+             return true;
+         } catch (MessagingException e) {
+             System.err.println("Error sending email: " + e.getMessage());
+             return false;
+         }
+     }
+     
+     public boolean sendEmail(String recipientEmail, String emailSubject, String emailBody) {
+         try {
+             // Create a message
+             Message message = new MimeMessage(session);
+             message.setFrom(new InternetAddress(senderEmail)); // Correctly setting the sender email
+             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recipientEmail));
+             message.setSubject(emailSubject);
+             message.setContent(emailBody, "text/html");
+
+
+             // Use Transport object for better control
+             Transport transport = session.getTransport("smtp");
+             transport.connect();
+             transport.sendMessage(message, message.getAllRecipients());
+             transport.close();
+
+             
+             return true;
+         } catch (MessagingException e) {
+             System.err.println("Error sending email: " + e.getMessage());
+             return false;
+         }
+     }
+     
+     
+     
+    
+	/*
 	public boolean sendEmail(String recipientEmail,String emailSubject, String emailBody)
 	{
 		Properties props = new Properties();
@@ -113,7 +185,7 @@ public class EmailService1 {
         }
     }
 	 
-	
+	*/
 	
 	public boolean sendEmail1(String recipientEmail, String emailSubject, String emailBody, String imagePath) {
 	    Properties props = new Properties();

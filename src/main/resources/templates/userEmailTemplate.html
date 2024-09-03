@@ -1,0 +1,15 @@
+<!-- src/main/resources/templates/userEmailTemplate.html -->
+<html>
+<body>
+    <p>Dear <span th:text="${fullName}"></span>,</p>
+    <p>Thank you for contacting Pragya School. We have received your message and will get back to you soon.</p>
+    <p>Here are the details of your query:</p>
+    <ul>
+        <li>Subject: <span th:text="${subject}"></span></li>
+        <li>Message: <p th:text="${message}"></p></li>
+        <li th:if="${city} != null">City: <span th:text="${city}"></span></li>
+        <li th:if="${state} != null">State: <span th:text="${state}"></span></li>
+    </ul>
+    <p>Best regards,<br/>Pragya School Admissions Team</p>
+</body>
+</html>

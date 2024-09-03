@@ -1,7 +1,9 @@
 package com.techverse.Controller;
 
 import java.time.Instant;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -171,64 +173,29 @@ public class UserController {
 
         // Construct the UserForm object if needed by your service layer
         UserForm userForm = new UserForm(fullName, email, phoneNumber, subject, message, city, state);
-        UserForm createdUserForm = userService.createUserForm(userForm);
-        
-        String schoolSubject = "Contact Us Request";
-        StringBuilder schoolBodyBuilder = new StringBuilder();
-        schoolBodyBuilder.append("<html><body>")
-            .append("<p>Dear Pragya School Admissions Committee,</p>")
-            .append("<p>A new message has been received through the contact form:</p>")
-            .append("<ul>")
-            .append("<li>Full Name: ").append(fullName).append("</li>")
-            .append("<li>Email: ").append(email).append("</li>")
-            .append("<li>Phone Number: ").append(phoneNumber).append("</li>")
-            .append("<li>Subject: ").append(subject).append("</li>")
-            .append("<li>Message: ")//.append(message).append("</li>");
-           .append("<p>").append(message).append("</p>");
+        userService.createUserForm(userForm);
 
-        if (city != null && !city.isEmpty()) {
-            schoolBodyBuilder.append("<li>City: ").append(city).append("</li>");
-        }
-        if (state != null && !state.isEmpty()) {
-            schoolBodyBuilder.append("<li>State: ").append(state).append("</li>");
-        }
+        // Prepare variables for the email templates
+        Map<String, Object> variables = new HashMap<>();
+        variables.put("fullName", fullName);
+        variables.put("email", email);
+        variables.put("phoneNumber", phoneNumber);
+        variables.put("subject", subject);
+        variables.put("message", message);
+        variables.put("city", city);
+        variables.put("state", state);
 
-        schoolBodyBuilder.append("</ul>")
-            .append("<p>Please review and respond accordingly.</p>")
-            .append("<p>Thank you.</p>")
-            .append("</body></html>");
+        // Generate email content using Thymeleaf
+        String schoolBody = emailService1.generateEmailContent("schoolEmailTemplate", variables);
+        String userBody = emailService1.generateEmailContent("userEmailTemplate", variables);
 
-        String schoolBody = schoolBodyBuilder.toString();
-
-        String userSubject = "Your Message to Pragya School";
-        StringBuilder userBodyBuilder = new StringBuilder();
-        userBodyBuilder.append("<html><body>")
-            .append("<p>Dear ").append(fullName).append(",</p>")
-            .append("<p>Thank you for contacting Pragya School. We have received your message and will get back to you soon.</p>")
-            .append("<p>Here are the details of your query:</p>")
-            .append("<ul>")
-            .append("<li>Subject: ").append(subject).append("</li>")
-            .append("<li>Message: ")//.append(message).append("</li>");
-             .append("<p>").append(message).append("</p>");
-
-        if (city != null && !city.isEmpty()) {
-            userBodyBuilder.append("<li>City: ").append(city).append("</li>");
-        }
-        if (state != null && !state.isEmpty()) {
-            userBodyBuilder.append("<li>State: ").append(state).append("</li>");
-        }
-
-        userBodyBuilder.append("</ul>")
-            .append("<p>Best regards,<br/>Pragya School Admissions Team</p>")
-            .append("</body></html>");
-
-        String userBody = userBodyBuilder.toString();
-
-       // sendEmailAsync(schoolEmail, schoolSubject, schoolBody);
-      //  sendEmailAsync(email, userSubject, userBody);
+        // Send emails asynchronously
+        sendEmailAsync(schoolEmail, "Contact Us Request", schoolBody);
+        sendEmailAsync(email, "Your Message to Pragya School", userBody);
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
     @Async
     public void sendEmailAsync(String to, String subject, String body) {
         emailService1.sendEmail(to, subject, body);
