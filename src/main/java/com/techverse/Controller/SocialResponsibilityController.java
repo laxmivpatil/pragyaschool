@@ -48,10 +48,10 @@ public class SocialResponsibilityController {
 		}
 	
 		@PostMapping("/")
-		public ResponseEntity<CommonResponse> addSocialResponsibility( @RequestPart(value = "title", required = false) String title,
+		public ResponseEntity<CommonResponse> addSocialResponsibility( @RequestPart(value = "title", required = false) String title,@RequestPart(value = "subtitle", required = false) String subtitle,
 	    		@RequestPart(value = "image", required = false) MultipartFile image) 
 			{
-				socialResponsibilityService.createSocialResponsibility(title, image);
+				socialResponsibilityService.createSocialResponsibility(title,subtitle, image);
 				
 				CommonResponse response=new CommonResponse();
 				response.setMessage("SocialResponsibility added Successfully");

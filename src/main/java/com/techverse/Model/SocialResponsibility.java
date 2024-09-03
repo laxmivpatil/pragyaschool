@@ -15,7 +15,8 @@ public class SocialResponsibility {
 	
 	
 	private String title;
-	
+
+	private String subtitle;
 	private String image;
 	
 	private String formatedId="";
@@ -71,6 +72,20 @@ public class SocialResponsibility {
 		this.id = id;
 		this.title = title;
 		this.image = image;
+	}
+
+
+
+
+	public String getSubtitle() {
+		return subtitle;
+	}
+
+
+
+
+	public void setSubtitle(String subtitle) {
+		this.subtitle = subtitle;
 	}
 	
 	

@@ -21,7 +21,7 @@ public class SocialResponsibilityService {
 	private SocialResponsibilityRepository  socialResponsibilityRepository;
 	
 	
-	public SocialResponsibility createSocialResponsibility(String title,MultipartFile image) {
+	public SocialResponsibility createSocialResponsibility(String title,String subtitle,MultipartFile image) {
 		String uniqueBlobName="";
 		String path="";
 		
@@ -39,6 +39,7 @@ public class SocialResponsibilityService {
 		 
 		SocialResponsibility socialResponsibility=new SocialResponsibility();
 		socialResponsibility.setTitle(title);
+		socialResponsibility.setSubtitle(subtitle);
 		socialResponsibility.setImage(path);
 		SocialResponsibility savedsocialResponsibility=socialResponsibilityRepository.save(socialResponsibility);
 		return savedsocialResponsibility;
