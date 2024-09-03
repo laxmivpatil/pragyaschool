@@ -159,7 +159,7 @@ public class UserController {
     */
     
     
-    @PostMapping("/create")
+    @GetMapping("/create")
     public ResponseEntity<Void> createUser(
         @RequestParam String fullName,
         @RequestParam String email,
@@ -182,8 +182,8 @@ public class UserController {
             .append("<li>Email: ").append(email).append("</li>")
             .append("<li>Phone Number: ").append(phoneNumber).append("</li>")
             .append("<li>Subject: ").append(subject).append("</li>")
-            .append("<li>Message: ").append(message).append("</li>")
-            .append("<p>").append(message).append("</p>");
+            .append("<li>Message: ")//.append(message).append("</li>");
+           .append("<p>").append(message).append("</p>");
 
         if (city != null && !city.isEmpty()) {
             schoolBodyBuilder.append("<li>City: ").append(city).append("</li>");
@@ -207,8 +207,8 @@ public class UserController {
             .append("<p>Here are the details of your query:</p>")
             .append("<ul>")
             .append("<li>Subject: ").append(subject).append("</li>")
-            .append("<li>Message: ").append(message).append("</li>")
-            .append("<p>").append(message).append("</p>");
+            .append("<li>Message: ")//.append(message).append("</li>");
+             .append("<p>").append(message).append("</p>");
 
         if (city != null && !city.isEmpty()) {
             userBodyBuilder.append("<li>City: ").append(city).append("</li>");
