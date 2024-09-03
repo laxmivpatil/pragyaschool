@@ -25,6 +25,28 @@ public class UserForm {
 	    
 	    private String state = "";
 
+	    
+	    
+	    
+	    
+	public UserForm() {
+			super();
+			// TODO Auto-generated constructor stub
+		}
+
+	public UserForm( String email, String phoneNumber, String fullName, String message, String subject,
+				String city, String state) {
+			 
+			 
+			this.email = email;
+			this.phoneNumber = phoneNumber;
+			this.fullName = fullName;
+			this.message = message;
+			this.subject = subject;
+			this.city = city;
+			this.state = state;
+		}
+
 	public Long getId() {
 		return id;
 	}
