@@ -171,7 +171,8 @@ public class UserController {
 
         // Construct the UserForm object if needed by your service layer
         UserForm userForm = new UserForm(fullName, email, phoneNumber, subject, message, city, state);
-      
+        UserForm createdUserForm = userService.createUserForm(userForm);
+        
         String schoolSubject = "Contact Us Request";
         StringBuilder schoolBodyBuilder = new StringBuilder();
         schoolBodyBuilder.append("<html><body>")
@@ -223,8 +224,8 @@ public class UserController {
 
         String userBody = userBodyBuilder.toString();
 
-        sendEmailAsync(schoolEmail, schoolSubject, schoolBody);
-        sendEmailAsync(email, userSubject, userBody);
+       // sendEmailAsync(schoolEmail, schoolSubject, schoolBody);
+      //  sendEmailAsync(email, userSubject, userBody);
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
