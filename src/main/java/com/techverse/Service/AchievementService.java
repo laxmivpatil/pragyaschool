@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.techverse.Model.Achievement;
@@ -28,6 +29,7 @@ public class AchievementService {
     }
     
     
+    @Cacheable("achievementsByYear")
     public List<Achievement> getAchievementsByYear(String year) {
         return achievementRepository.findByYear(year);
     }
