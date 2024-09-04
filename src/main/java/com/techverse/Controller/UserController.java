@@ -170,7 +170,7 @@ public class UserController {
         @RequestParam String message,
         @RequestParam(required = false) String city,
         @RequestParam(required = false) String state) {
-
+    	System.out.println("hi1");
         // Construct the UserForm object if needed by your service layer
         UserForm userForm = new UserForm(fullName, email, phoneNumber, subject, message, city, state);
         userService.createUserForm(userForm);
@@ -184,7 +184,8 @@ public class UserController {
         variables.put("message", message);
         variables.put("city", city);
         variables.put("state", state);
-
+        System.out.println("hi2");
+        
         // Generate email content using Thymeleaf
         String schoolBody = emailService1.generateEmailContent("schoolEmailTemplate", variables);
         String userBody = emailService1.generateEmailContent("userEmailTemplate", variables);
@@ -192,12 +193,15 @@ public class UserController {
         // Send emails asynchronously
         sendEmailAsync(schoolEmail, "Contact Us Request", schoolBody);
         sendEmailAsync(email, "Your Message to Pragya School", userBody);
-
+        System.out.println("hi3");
+        
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @Async
     public void sendEmailAsync(String to, String subject, String body) {
+    	System.out.println("hi4");
+        
         emailService1.sendEmail(to, subject, body);
     }
 

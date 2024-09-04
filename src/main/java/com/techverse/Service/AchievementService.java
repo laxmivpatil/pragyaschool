@@ -28,7 +28,7 @@ public class AchievementService {
         return achievementRepository.save(achievement);
     }
     
-    
+     
      @Cacheable("achievementsByYear")
     public List<Achievement> getAchievementsByYear(String year) {
         return achievementRepository.findByYear(year);
