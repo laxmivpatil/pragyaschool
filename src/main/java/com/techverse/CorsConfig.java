@@ -13,7 +13,7 @@ public class CorsConfig implements WebMvcConfigurer {
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
                 //.allowedOrigins("http://localhost:4200") // Add your Angular app URL
-                .allowedOrigins("https://pragyagirlsschool.com")
+                .allowedOrigins("https://pragyagirlsschool.com","http://localhost:4200")
                 .allowedMethods("GET", "POST", "PUT", "DELETE")
                 .allowedHeaders("*")
                 .allowCredentials(true)
