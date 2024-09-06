@@ -21,6 +21,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
 
 @RestController
 @RequestMapping("/admissions")
@@ -264,58 +265,58 @@ public class GeneralAdmissionController {
 		  
 		  } 
 		  else { 
-			  String birthC="",lastR="",parentA="",studentA="", sssmi="", bankD="", castC="",transferC="", profileP=""; //name String
+			  variables.put("pen", pen);
+			  String  birthC="",lastR="",parentA="",studentA="", sssmi="", bankD="", castC="",transferC="", profileP=""; //name String
 			  String birthCN="",lastRN="",parentAN="",studentAN="", sssmiN="", bankDN="",castCN="",transferCN="", profilePN=""; //extension String
 			  String birthT="",lastRT="",parentAT="",studentAT="", sssmiT="", bankDT="", castCT="",transferCT="", profilePT="";
 		  
 		  
-		  if (birthCertificate != null && !birthCertificate.isEmpty()) {
+		   
 			  birthT = getExtension(birthCertificate);
 		  
 		  birthCN = "Birth_Certificate" + " " + Instant.now().toEpochMilli();
 		  
 		  birthC = storageService.uploadFileOnAzure(birthCertificate,
 		  birthCN+"."+birthT );
+		   
 		  
-		  }
 		  
-		  if (lastResult != null && !lastResult.isEmpty()) { 
 			  lastRT= getExtension(lastResult);
 			  lastRN= "Last_Year_Result" + " " + Instant.now().toEpochMilli();
-			  lastR = storageService.uploadFileOnAzure(lastResult, lastRN+"."+lastRT); }
+			  lastR = storageService.uploadFileOnAzure(lastResult, lastRN+"."+lastRT);  
 		  
-		  if (parentAadhar != null && !parentAadhar.isEmpty()) { parentAT=
+		   parentAT=
 		  getExtension(parentAadhar); parentAN = "Parent_Aadhar" + " " +
 		  Instant.now().toEpochMilli(); parentA =
-		  storageService.uploadFileOnAzure(parentAadhar,parentAN+"."+parentAT); }
+		  storageService.uploadFileOnAzure(parentAadhar,parentAN+"."+parentAT); 
 		  
-		  if (studentAadhar != null && !studentAadhar.isEmpty()) { studentAT =
+		  studentAT =
 		  getExtension(studentAadhar); studentAN = "Student_Aadhar" + " " +
 		  Instant.now().toEpochMilli(); studentA =
-		  storageService.uploadFileOnAzure(studentAadhar, studentAN+"."+studentAT ); }
+		  storageService.uploadFileOnAzure(studentAadhar, studentAN+"."+studentAT );  
 		  
-		  if (bankDoc != null && !bankDoc.isEmpty()) { bankDT = getExtension(bankDoc);
+		    bankDT = getExtension(bankDoc);
 		  bankDN = "Bank_Doc" + " " + Instant.now().toEpochMilli() ; bankD =
-		  storageService.uploadFileOnAzure(bankDoc, bankDN+"."+bankDT); }
+		  storageService.uploadFileOnAzure(bankDoc, bankDN+"."+bankDT); 
 		  
-		  if (cast != null && !cast.isEmpty()) { castCT = getExtension(cast); castCN =
+		    castCT = getExtension(cast); castCN =
 		  "Cast" + " " + Instant.now().toEpochMilli(); castC =
-		  storageService.uploadFileOnAzure(cast, castCN+"."+castCT); }
+		  storageService.uploadFileOnAzure(cast, castCN+"."+castCT);  
 		  
-		  if (transferCertificate != null && !transferCertificate.isEmpty()) {
+		  
 		  transferCT= getExtension(transferCertificate); transferCN =
 		  "Transfer_Certificate" + " " + Instant.now().toEpochMilli(); 
 		  transferC = storageService.uploadFileOnAzure(transferCertificate,
-		  transferCN+"."+transferCT); }
+		  transferCN+"."+transferCT); 
 		  
-		  if (profile != null && !profile.isEmpty()) { profilePT =
+		   profilePT =
 		  getExtension(profile); profilePN = "Profile" + " " +
 		  Instant.now().toEpochMilli() ; profileP =
-		  storageService.uploadFileOnAzure(profile, profilePN+"."+profilePT); }
+		  storageService.uploadFileOnAzure(profile, profilePN+"."+profilePT); 
 		  
-		  if (sssmid != null && !sssmid.isEmpty()) { sssmiT = getExtension(sssmid);
+		   sssmiT = getExtension(sssmid);
 		  sssmiN = "SSSMID" + " " + Instant.now().toEpochMilli() ; sssmi =
-		  storageService.uploadFileOnAzure(sssmid, sssmiN+"."+sssmiT); }
+		  storageService.uploadFileOnAzure(sssmid, sssmiN+"."+sssmiT); 
 		  
 		  GeneralAdmission createdAdmission = new GeneralAdmission(firstName,lastName,
 		  gender,dateOfBirth, admissionClass,fatherName, motherName, mobileNo, email,
@@ -325,8 +326,9 @@ public class GeneralAdmissionController {
 		  
 		  
 		  ResponseEntity<Void> response = new ResponseEntity<>(HttpStatus.OK);
-		   
-		  
+		 
+			
+
 		
 		  String schoolBody = emailService1.generateEmailContent("schooladvanceadmission", variables);
 		  
@@ -337,9 +339,9 @@ public class GeneralAdmissionController {
 		   sendEmailwithattchAsync(schoolEmail, "New Admission Enquiry", schoolBody, birthC,birthCN+"."+birthT, lastR,lastRN+"."+lastRT, parentA,parentAN+"."+parentAT, studentA,studentAN+"."+studentAT, bankD,bankDN+"."+bankDT, castC,castCN+"."+castCT,
 		 	  transferC,transferCN+"."+transferCT, profileP,profilePN+"."+profilePT, sssmi,sssmiN+"."+sssmiT);
 		 
-	       // sendEmailAsync(email, "Your Admission Enquiry", userBody);
+	       sendEmailAsync(email, "Your Admission Enquiry", userBody);
 		  
-		  
+		   
 	 
 		 return response;
 		  }

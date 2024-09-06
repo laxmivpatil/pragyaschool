@@ -28,6 +28,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile; 
@@ -186,6 +187,7 @@ public class StorageSevice {
           return null;
       }
   }
+  
   public ByteArrayResource downloadFileFromAzure(String azureFileUrl, String originalFileName) {
 	    try {
 	        // Create a BlobClient using the full URL with SAS token
