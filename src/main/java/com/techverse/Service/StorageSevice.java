@@ -1,8 +1,12 @@
 package com.techverse.Service;
 
 
+import com.azure.core.util.BinaryData;
+import com.azure.storage.blob.BlobClient;
 import com.azure.storage.blob.BlobClientBuilder;
-import com.azure.storage.blob.BlobServiceClientBuilder;  
+import com.azure.storage.blob.BlobServiceClientBuilder;
+import com.azure.storage.blob.models.BlobDownloadContentResponse;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.time.Duration;
@@ -14,6 +18,8 @@ import com.azure.storage.blob.sas.BlobSasPermission;
 import com.azure.storage.blob.sas.BlobServiceSasSignatureValues;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.InputStreamSource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
  
@@ -180,8 +186,30 @@ public class StorageSevice {
           return null;
       }
   }
+  public ByteArrayResource downloadFileFromAzure(String azureFileUrl, String originalFileName) {
+	    try {
+	        // Create a BlobClient using the full URL with SAS token
+	        BlobClient blobClient = new BlobClientBuilder()
+	                .endpoint(azureFileUrl)  // Full URL with SAS token
+	                .buildClient();
 
-  
+	        // Download the content of the blob
+	        BinaryData content = blobClient.downloadContent();
+
+	        // Convert the content into a byte array
+	        byte[] fileData = content.toBytes();
+
+	        // Create a ByteArrayResource with the original file name and extension
+	        return new ByteArrayResource(fileData) {
+	            @Override
+	            public String getFilename() {
+	                return originalFileName;
+	            }
+	        };
+	    } catch (Exception e) {
+	        throw new RuntimeException("Failed to download file from Azure Blob Storage: " + azureFileUrl, e);
+	    }
+	}
   public String uploadFileOnAzure(MultipartFile file,String uniqueBlobName ) {
       try {
           // Construct Azure Blob Storage URL

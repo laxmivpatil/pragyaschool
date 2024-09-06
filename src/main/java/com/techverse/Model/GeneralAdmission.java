@@ -76,7 +76,7 @@ public class GeneralAdmission {
 			String pEN, String birthCertificate, String lastResult, String parentAadhar, String studentAadhar,
 			String sSSMID, String bankDoc, String cast, String transferCertificate, String profile) {
 		super();
-		this.id = id;
+		 
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.gender = gender;

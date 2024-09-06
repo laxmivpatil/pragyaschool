@@ -12,10 +12,8 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.techverse.Model.SocialResponsibility;
-import com.techverse.Repository.SocialResponsibilityRepository;
-import com.techverse.Response.CommonResponse;
-import com.techverse.Response.GeneralAdmissionResponse;
+import com.techverse.Model.SocialResponsibility; 
+import com.techverse.Response.CommonResponse; 
 import com.techverse.Response.SocialResponsibilityResponse;
 import com.techverse.Service.SocialResponsibilityService;
 

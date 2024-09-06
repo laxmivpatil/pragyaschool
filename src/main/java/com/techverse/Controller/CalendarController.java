@@ -18,13 +18,11 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.techverse.Model.Achievement;
+ 
 import com.techverse.Model.Calendar;
-import com.techverse.Repository.CalendarRepository;
-import com.techverse.Response.AchievementResponse;
+import com.techverse.Repository.CalendarRepository; 
 import com.techverse.Response.CalendarResponse;
-import com.techverse.Response.CommonResponse;
-import com.techverse.Service.AchievementService;
+import com.techverse.Response.CommonResponse; 
 import com.techverse.Service.CalendarService;
  
 import com.techverse.Service.StorageSevice;
@@ -81,7 +79,7 @@ public class CalendarController {
 	    	 calendar.setMonth(month);
 	    	 calendar.setYear(year);
 	    	 calendar.setEventName(eventName);
-	    	 Calendar createdCalendar = calendarService.createCalendar(calendar);
+	    	  calendarService.createCalendar(calendar);
 	        
 	        CommonResponse response=new CommonResponse();
 			response.setMessage("Calendar added Successfully");

@@ -2,19 +2,23 @@
 
 package com.techverse.Service;
 
-import java.io.File;
+ 
+import java.io.InputStream;
+import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.security.SecureRandom;
-import java.time.LocalDateTime;
+ 
 import java.util.Map;
-import java.util.Optional;
+ 
 import java.util.Properties;
-import java.util.Random;
+import java.util.concurrent.CompletableFuture;
 
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
-import javax.activation.FileDataSource;
-import javax.activation.URLDataSource;
+import javax.activation.FileDataSource; 
 import javax.annotation.PostConstruct;
 import javax.mail.Authenticator;
 import javax.mail.BodyPart;
@@ -30,19 +34,19 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import javax.mail.util.ByteArrayDataSource;
 
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.mail.SimpleMailMessage;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.InputStreamSource;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.stereotype.Service; 
 import org.springframework.web.multipart.MultipartFile;
 import org.thymeleaf.context.Context;
-import org.thymeleaf.spring5.SpringTemplateEngine;
-import org.springframework.mail.javamail.JavaMailSender;
+import org.thymeleaf.spring5.SpringTemplateEngine; 
 import org.springframework.mail.javamail.MimeMessageHelper;
-import javax.mail.MessagingException;
-import javax.mail.internet.MimeMessage;
+import org.springframework.scheduling.annotation.Async;
+ 
 
 @Service
 public class EmailService1 {
@@ -50,17 +54,18 @@ public class EmailService1 {
 	    private static final SecureRandom random = new SecureRandom();
 	    private Session session;
 
-	 
-	    @Value("${mail.smtp.host}")
+	    @Autowired
+		private StorageSevice storageService;
+	    @Value("${spring.mail.host}")
 	    private String host;
 
-	    @Value("${mail.smtp.port}")
+	    @Value("${spring.mail.port}")
 	    private String port;
 
-	    @Value("${mail.smtp.user}")
+	    @Value("${spring.mail.username}")
 	    private String senderEmail;
 
-	    @Value("${mail.smtp.password}")
+	    @Value("${spring.mail.password}")
 	    private String senderPassword;
 
      
@@ -77,45 +82,46 @@ public class EmailService1 {
      }
      
      
-    
-     @PostConstruct
-     private void initializeSession() {
-         Properties props = new Properties();
-         props.put("mail.smtp.host", host);
-         props.put("mail.smtp.port", port);
-         props.put("mail.smtp.auth", "true");
-         props.put("mail.smtp.starttls.enable", "true");
-         props.put("mail.smtp.starttls.required", "true");
-         props.put("mail.smtp.ssl.enable", "true");
-         props.put("mail.smtp.ssl.trust", host);
+     
+   
 
-         this.session = Session.getInstance(props, new Authenticator() {
-             @Override
-             protected PasswordAuthentication getPasswordAuthentication() {
-                 return new PasswordAuthentication(senderEmail, senderPassword);
-             }
-         });
-     }
-     //using java Mail sender 
-     public boolean sendEmail2(String recipientEmail, String emailSubject, String emailBody) {
+     /**
+      * Sends an email asynchronously using JavaMailSender.
+      * @param recipientEmail the recipient's email address
+      * @param emailSubject the subject of the email
+      * @param emailBody the body of the email (HTML content)
+      * @return CompletableFuture indicating success (true) or failure (false)
+      */
+     @Async
+     public CompletableFuture<Boolean> sendEmail(String recipientEmail, String emailSubject, String emailBody) {
          try {
-             MimeMessage mimeMessage = emailSender.createMimeMessage();
-             MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
-             
-             helper.setFrom(senderEmail); // You can use the same as senderEmail if required
-             helper.setTo(recipientEmail);
-             helper.setSubject(emailSubject);
-             helper.setText(emailBody, true); // true indicates HTML content
+             // Create a MimeMessage
+             MimeMessage message = emailSender.createMimeMessage();
+             MimeMessageHelper helper = new MimeMessageHelper(message, true);
 
-             emailSender.send(mimeMessage);
-             return true;
+             // Set the email details
+             helper.setFrom("info@pragyagirlsschool.com");  // Sender's email
+             helper.setTo(recipientEmail);              // Recipient's email
+             helper.setSubject(emailSubject);           // Subject
+             helper.setText(emailBody, true);           // HTML email body
+
+             // Send the email
+             emailSender.send(message);
+
+             return CompletableFuture.completedFuture(true);  // Successfully sent
          } catch (MessagingException e) {
-             System.err.println("Error sending email: " + e.getMessage());
-             return false;
+             e.printStackTrace();
+             return CompletableFuture.completedFuture(false);  // Failure
          }
      }
+  
      
-     public boolean sendEmail(String recipientEmail, String emailSubject, String emailBody) {
+     
+    
+     
+      
+     //old use
+     public boolean sendEmail4(String recipientEmail, String emailSubject, String emailBody) {
          try {
              // Create a message
              Message message = new MimeMessage(session);
@@ -239,85 +245,50 @@ public class EmailService1 {
 	    }
 	}
 
-	public boolean sendEmailWithAttachment(String recipientEmail, String emailSubject, String emailBody, MultipartFile birthCertificate ,
-           MultipartFile lastResult,
-             MultipartFile parentAadhar,
-             MultipartFile studentAadhar,
-            MultipartFile bankDoc,
-             MultipartFile cast,
-             MultipartFile transferCertificate,
-              MultipartFile profile,
-            MultipartFile sssmid) {
-	    Properties props = new Properties();
-	    props.put("mail.smtp.host", host);
-        props.put("mail.smtp.port", port);
-        props.put("mail.smtp.auth", "true");
-        props.put("mail.smtp.starttls.enable", "true");
-        props.put("mail.smtp.starttls.required", "true");
-        props.put("mail.smtp.ssl.enable", "true");
-        props.put("mail.smtp.ssl.trust", "mail.pragyagirlsschool.com");
-     //   props.put("mail.debug", "true");
-
-	    // Create a mail session with the specified properties
-	    Session session = Session.getInstance(props, new Authenticator() {
-	        protected PasswordAuthentication getPasswordAuthentication() {
-	            return new PasswordAuthentication(senderEmail, senderPassword);
-	        }
-	    });
-
+	@Async
+	public CompletableFuture<Boolean> sendEmailWithAttachment(String recipientEmail, String emailSubject, String emailBody,
+	                                                          String birthCertificate, String birthCertificatefile,String lastResult,String lastResultfile,
+	                                          	    		String parentAadhar,String parentAadharfile,
+	                                        	    		String studentAadhar,String studentAadharfile,
+	                                        	    		String bankDoc, String bankDocfile,
+	                                        	    		String cast,String castfile,
+	                                        	    		String transferCertificate, String transferCertificatefile, 
+	                                        	    		String profile,String profilefile,
+	                                        	    		String sssmid,String sssmidfile) {
 	    try {
-	        // Create a message
-	        MimeMessage message = new MimeMessage(session);
-	        message.setFrom(new InternetAddress(senderEmail));
-	        message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recipientEmail));
-	        message.setSubject(emailSubject);
-
-	        // Create the message body part
-	        MimeBodyPart messageBodyPart = new MimeBodyPart();
-	        messageBodyPart.setContent(emailBody, "text/html");
-
-	        
-	     // Create the multipart message
-	        Multipart multipart = new MimeMultipart();
-	        multipart.addBodyPart(messageBodyPart);
-	        
-	       
-	        
-	        
-	         multipart.addBodyPart(createAttachment(birthCertificate));
-	         multipart.addBodyPart(createAttachment( lastResult));
-	         multipart.addBodyPart(createAttachment(parentAadhar));
-	         multipart.addBodyPart(createAttachment(studentAadhar));
-	         multipart.addBodyPart(createAttachment(bankDoc));
-	         multipart.addBodyPart(createAttachment( cast));
-	         multipart.addBodyPart(createAttachment(transferCertificate));
-	         multipart.addBodyPart(createAttachment(profile));
-	         multipart.addBodyPart(createAttachment(sssmid));
+	        // Create a MimeMessage
+	        MimeMessage message = emailSender.createMimeMessage();
+	        MimeMessageHelper helper = new MimeMessageHelper(message, true);
 	         
-	        // Set the multipart message to the email message
-	        message.setContent(multipart);
+	        // Set email details
+	        helper.setFrom("info@pragyagirlsschool.com");
+	        helper.setTo(recipientEmail);
+	        helper.setSubject(emailSubject); 
+	        helper.setText(emailBody, true);  // HTML content
+	         
+	          helper.addAttachment(birthCertificatefile,storageService.downloadFileFromAzure(birthCertificate, birthCertificatefile));
+	          helper.addAttachment(lastResultfile, storageService.downloadFileFromAzure(lastResult, lastResultfile));
+	          helper.addAttachment(parentAadharfile, storageService.downloadFileFromAzure(parentAadhar, parentAadharfile));
+	          helper.addAttachment(studentAadharfile, storageService.downloadFileFromAzure(studentAadhar, studentAadharfile));
+	          helper.addAttachment(bankDocfile, storageService.downloadFileFromAzure(bankDoc, bankDocfile));
+	          helper.addAttachment(castfile, storageService.downloadFileFromAzure(cast, castfile));
+	          helper.addAttachment(transferCertificatefile, storageService.downloadFileFromAzure(transferCertificate, transferCertificatefile));
+	          helper.addAttachment(profilefile, storageService.downloadFileFromAzure(profile, profilefile));
+	          helper.addAttachment(sssmidfile, storageService.downloadFileFromAzure(sssmid, sssmidfile));
 
-	        // Send the message
-	        Transport.send(message);
+	        
+	        
+	        // Send the email
+	        emailSender.send(message);
 
-	        System.out.println("Email with attachment sent successfully.");
-	        return true;
-
+	          
+	        return CompletableFuture.completedFuture(true);  // Successfully sent
 	    } catch (Exception e) {
-	        System.out.println("Error sending email with attachment: " + e.getMessage());
-	        return false;
+	        e.printStackTrace();
+	        return CompletableFuture.completedFuture(false);  // Failure
 	    }
 	}
 
-
-	 public MimeBodyPart createAttachment(MultipartFile file) throws Exception {
-	        MimeBodyPart attachmentBodyPart = new MimeBodyPart();
-	        DataSource source = new ByteArrayDataSource(file.getBytes(), file.getContentType());
-	        attachmentBodyPart.setDataHandler(new DataHandler(source));
-	        attachmentBodyPart.setFileName(file.getOriginalFilename());
-	        return attachmentBodyPart;
-	    }
-	 
 	 
 	 public  String generateOTP(int length) {
 	        StringBuilder otp = new StringBuilder(length);
@@ -326,5 +297,39 @@ public class EmailService1 {
 	            otp.append(DIGITS.charAt(index));
 	        }
 	        return otp.toString();
-	    }
+	 }
+
+	 
 }
+
+
+/*
+// Add all attachments
+if (birthCertificate != null && !birthCertificate.isEmpty()) {
+    helper.addAttachment(birthCertificate.getOriginalFilename(), birthCertificate);
+}
+if (lastResult != null && !lastResult.isEmpty()) {
+    helper.addAttachment(lastResult.getOriginalFilename(), lastResult);
+}
+if (parentAadhar != null && !parentAadhar.isEmpty()) {
+    helper.addAttachment(parentAadhar.getOriginalFilename(), parentAadhar);
+}
+if (studentAadhar != null && !studentAadhar.isEmpty()) {
+    helper.addAttachment(studentAadhar.getOriginalFilename(), studentAadhar);
+}
+if (bankDoc != null && !bankDoc.isEmpty()) {
+    helper.addAttachment(bankDoc.getOriginalFilename(), bankDoc);
+}
+if (cast != null && !cast.isEmpty()) {
+    helper.addAttachment(cast.getOriginalFilename(), cast);
+}
+if (transferCertificate != null && !transferCertificate.isEmpty()) {
+    helper.addAttachment(transferCertificate.getOriginalFilename(), transferCertificate);
+}
+if (profile != null && !profile.isEmpty()) {
+    helper.addAttachment(profile.getOriginalFilename(), profile);
+}
+if (sssmid != null && !sssmid.isEmpty()) {
+    helper.addAttachment(sssmid.getOriginalFilename(), sssmid);
+}
+*/

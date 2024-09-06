@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>New Admission Request</title>
+</head>
+<body>
+    <p>Dear Pragya School Admissions Committee,</p>
+
+    <p>We are pleased to inform you that a new admission request has been received for the academic year 2024.</p>
+
+    <p>Details of the applicant are as follows:</p>
+    <ul>
+        <li>Full Name: <span th:text="${firstName} + ' ' + ${lastName}"></span></li>
+        <li>Date of Birth: <span th:text="${dateOfBirth}"></span></li>
+        <li>Class Applying For: <span th:text="${admissionClass}"></span></li>
+        <li>Father's Name: <span th:text="${fatherName}"></span></li>
+        <li>Mother's Name: <span th:text="${motherName}"></span></li>
+        <li>Mobile Number: <span th:text="${mobileNo}"></span></li>
+        <li>Email Address: <span th:text="${email}"></span></li>
+        <li>PEN: <span th:text="${pen}"></span></li>
+    </ul>
+
+    <p>Attached documents:</p>
+    <ul>
+        <li>Birth Certificate</li>
+        <li>Previous Year's Result</li>
+        <li>Parent's Aadhar Card</li>
+        <li>Student's Aadhar Card</li>
+        <li>Bank Documents</li>
+        <li>Caste Certificate</li>
+        <li>Transfer Certificate</li>
+        <li>Profile Picture</li>
+    </ul>
+
+    <p>Please review the details and documents attached. If further information or clarification is required, please feel free to contact us.</p>
+
+    <p>Thank you for considering this admission request.</p>
+
+    <p>Best regards,<br/>
+    <span th:text="${firstName} + ' ' + ${lastName}"></span><br/>
+    <span th:text="${mobileNo}"></span>
+    </p>
+</body>
+</html>

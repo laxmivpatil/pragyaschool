@@ -9,8 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PutMapping; 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
@@ -62,7 +61,7 @@ public class AchievementController {
 	    	achievement.setSubtitle(subtitle);
 	    	achievement.setYear(year);
 	    	
-	        Achievement createdAchievement = achievementService.createAchievement(achievement);
+	         achievementService.createAchievement(achievement);
 	        
 	        CommonResponse response=new CommonResponse();
 			response.setMessage("Achievement added Successfully");
@@ -95,7 +94,7 @@ public class AchievementController {
 	        String path = storageService.uploadFileOnAzure(image, uniqueBlobName + '.' + ext);
 
 	        // Update the achievement image in the database
-	        Achievement updatedAchievement = achievementService.updateAchievementImage(id, path);
+	  achievementService.updateAchievementImage(id, path);
 	        CommonResponse response=new CommonResponse();
 			response.setMessage("Achievement updated Successfully");
 			

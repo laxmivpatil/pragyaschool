@@ -7,10 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.techverse.Model.OurCampus;
-import com.techverse.Model.SocialResponsibility;
-import com.techverse.Repository.OurCampusRepository;
-import com.techverse.Repository.SocialResponsibilityRepository;
+import com.techverse.Model.OurCampus; 
+import com.techverse.Repository.OurCampusRepository; 
 
 @Service
 public class OurCampusService {

@@ -1,10 +1,8 @@
 package com.techverse.Controller;
-
-import java.time.Instant;
+ 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.Map; 
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,20 +10,18 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.bind.annotation.RequestBody; 
+import org.springframework.web.bind.annotation.RequestParam; 
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
+ 
 
-import com.techverse.Model.GeneralAdmission;
+ 
 import com.techverse.Model.UserForm;
 import com.techverse.Repository.UserFormRepository;
 import com.techverse.Response.ApiResponse;
-import com.techverse.Service.EmailService;
+ 
 import com.techverse.Service.EmailService1;
-import com.techverse.Service.StorageSevice;
+ 
 import com.techverse.Service.UserService;
 
 @RestController 
@@ -33,52 +29,15 @@ public class UserController {
 	String schoolEmail="contactus@pragyagirlsschool.com";
 	 @Autowired
 	    private UserFormRepository userFormRepository;
-	@Autowired
-	private EmailService emailService;
+	 
 	@Autowired
 	private EmailService1 emailService1;
 	@Autowired
 	private UserService userService;
-	@Autowired
-	private StorageSevice storageService;
-	
-	@GetMapping("/")
-	public String uploadFile()
-	{
- 	String recipientEmail = "laxmi.patil@techverse.world";
-		String emailSubject = "Welcome to Our Service";
-		String emailBody = "<h2>Welcome to Our Service</h2><p>We are glad to have you with us.</p>";
-		String imagePath = "src/main/resources/static/images/logo.png"; // Example: "src/main/resources/static/images/logo.png"
-
-		boolean result = emailService.sendEmail1(recipientEmail, emailSubject, emailBody, imagePath);
-
-		if (result) {
-		    System.out.println("Email sent successfully.");
-		} else {
-		    System.out.println("Failed to send email.");
-		}
-		return "welcome";
-	}
-	@PostMapping("/test")
-	public String test()
-	{ 
-		String recipientEmail = "laxmipatil070295@gmail.com";
-		//String recipientEmail = "maneomkar94@gmail.com";
-		//String recipientEmail = "bhaktithorat20@gmail.com";
-		//String recipientEmail ="keerthanams@techverse.world";
-		//String recipientEmail ="keerthu.m230@gmail.com";
-		
-		//String recipientEmail="test@pragyagirlsschool.com";
-	//String recipientEmail="laxmi.patil@techverse.world";
-		String emailSubject = "Welcome to Our Service";
-		String emailBody = "<h2>Welcome to Our Service</h2><p>We are glad to have you with us.</p>";
-		 
-
-		emailService1.sendEmail(recipientEmail, emailSubject, emailBody);
-		return "welcome";
-	}
 	 
 	
+	 
+	 
  
     @GetMapping("/getAll")
     public ResponseEntity<ApiResponse> getAllUserForms() {
@@ -159,7 +118,32 @@ public class UserController {
     }
     
     */
-    
+    @PostMapping("/create")
+    public ResponseEntity<Void> createUser(@RequestBody UserForm userForm) {
+        // Save user data to the database
+    	   userFormRepository.save(userForm);
+
+        // Prepare variables for the email templates
+        Map<String, Object> variables = new HashMap<>();
+        variables.put("fullName", userForm.getFullName());
+        variables.put("email", userForm.getEmail());
+        variables.put("phoneNumber", userForm.getPhoneNumber());
+        variables.put("subject", userForm.getSubject());
+        variables.put("message", userForm.getMessage());
+        variables.put("city", userForm.getCity());
+        variables.put("state", userForm.getState());
+
+        // Generate email content using Thymeleaf
+        String schoolBody = emailService1.generateEmailContent("schoolEmailTemplate", variables);
+        String userBody = emailService1.generateEmailContent("userEmailTemplate", variables);
+
+        // Send emails asynchronously
+        sendEmailAsync(schoolEmail, "Contact Us Request", schoolBody);
+        sendEmailAsync(userForm.getEmail(), "Your Message to Pragya School", userBody);
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
     
     @GetMapping("/create")
     public ResponseEntity<Void> createUser(
@@ -172,8 +156,8 @@ public class UserController {
         @RequestParam(required = false) String state) {
     	  // Construct the UserForm object if needed by your service layer
         UserForm userForm = new UserForm(fullName, email, phoneNumber, subject, message, city, state);
-        userService.createUserForm(userForm);
-
+        //userService.createUserForm(userForm);
+        userFormRepository.save(userForm);
         // Prepare variables for the email templates
         Map<String, Object> variables = new HashMap<>();
         variables.put("fullName", fullName);
@@ -188,15 +172,16 @@ public class UserController {
         // Generate email content using Thymeleaf
         String schoolBody = emailService1.generateEmailContent("schoolEmailTemplate", variables);
         String userBody = emailService1.generateEmailContent("userEmailTemplate", variables);
+        ResponseEntity<Void> response = new ResponseEntity<>(HttpStatus.OK);
 
         // Send emails asynchronously
-        sendEmailAsync(schoolEmail, "Contact Us Request", schoolBody);
+      sendEmailAsync(schoolEmail, "Contact Us Request", schoolBody);
         sendEmailAsync(email, "Your Message to Pragya School", userBody);
        
-        return new ResponseEntity<>(HttpStatus.OK);
+        return response;
     }
 
-    @Async
+    @Async("taskExecutor")
     public void sendEmailAsync(String to, String subject, String body) {
     	 
         

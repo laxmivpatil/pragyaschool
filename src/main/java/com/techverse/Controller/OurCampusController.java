@@ -13,10 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.techverse.Response.CommonResponse;
-import com.techverse.Response.OurCampusResponse;
-import com.techverse.Response.SocialResponsibilityResponse;
-import com.techverse.Service.OurCampusService;
-import com.techverse.Service.SocialResponsibilityService;
+import com.techverse.Response.OurCampusResponse; 
+import com.techverse.Service.OurCampusService; 
 
 @RestController
 @RequestMapping("/ourcampus")
