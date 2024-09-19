@@ -18,6 +18,7 @@ public class GeneralAdmission {
     private String gender;
     private String dateOfBirth;
     private String admissionClass;
+    private String preferredSubject="";
     private String fatherName;
     private String motherName;
     private String mobileNo;
@@ -45,7 +46,7 @@ public class GeneralAdmission {
     
     
     public GeneralAdmission(Long id, String firstName, String lastName, String gender, String dateOfBirth,
-			String admissionClass, String fatherName, String motherName, String mobileNo, String email, String type,
+			String admissionClass,String preferredSubject, String fatherName, String motherName, String mobileNo, String email, String type,
 			String pEN, String birthCertificate, String lastResult, String parentAadhar, String studentAadhar,
 			String sSSMID, String bankDoc, String cast, String transferCertificate, String profile) {
 		super();
@@ -55,6 +56,8 @@ public class GeneralAdmission {
 		this.gender = gender;
 		this.dateOfBirth = dateOfBirth;
 		this.admissionClass = admissionClass;
+
+		this.preferredSubject= preferredSubject;
 		this.fatherName = fatherName;
 		this.motherName = motherName;
 		this.mobileNo = mobileNo;
@@ -70,9 +73,10 @@ public class GeneralAdmission {
 		this.cast = cast;
 		this.transferCertificate = transferCertificate;
 		this.profile = profile;
+	
 	}
     public GeneralAdmission( String firstName, String lastName, String gender, String dateOfBirth,
-			String admissionClass, String fatherName, String motherName, String mobileNo, String email, String type,
+			String admissionClass,String preferredSubject, String fatherName, String motherName, String mobileNo, String email, String type,
 			String pEN, String birthCertificate, String lastResult, String parentAadhar, String studentAadhar,
 			String sSSMID, String bankDoc, String cast, String transferCertificate, String profile) {
 		super();
@@ -82,6 +86,7 @@ public class GeneralAdmission {
 		this.gender = gender;
 		this.dateOfBirth = dateOfBirth;
 		this.admissionClass = admissionClass;
+		this.preferredSubject= preferredSubject;
 		this.fatherName = fatherName;
 		this.motherName = motherName;
 		this.mobileNo = mobileNo;
@@ -103,25 +108,16 @@ public class GeneralAdmission {
 		// TODO Auto-generated constructor stub
 	}
     
-	public GeneralAdmission(Long id, String firstName, String lastName, String gender, String dateOfBirth,
-			String admissionClass, String fatherName, String motherName, String mobileNo, String email,String type) {
-		super();
-		this.id = id;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.gender = gender;
-		this.dateOfBirth = dateOfBirth;
-		this.admissionClass = admissionClass;
-		this.fatherName = fatherName;
-		this.motherName = motherName;
-		this.mobileNo = mobileNo;
-		this.email = email;
-		this.type=type;
+ 
+	
+	
+	
+	public String getPreferredSubject() {
+		return preferredSubject;
 	}
-	
-	
-	
-	
+	public void setPreferredSubject(String preferredSubject) {
+		this.preferredSubject = preferredSubject;
+	}
 	public String getType() {
 		return type;
 	}

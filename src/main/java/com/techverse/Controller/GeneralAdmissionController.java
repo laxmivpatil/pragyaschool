@@ -227,6 +227,7 @@ public class GeneralAdmissionController {
 			@RequestPart(value = "email", required = false) String email,
 			@RequestPart(value = "type", required = false) String type,
 			@RequestPart(value = "pen", required = false) String pen,
+			@RequestPart(value = "preferredSubject", required = false) String preferredSubject,
 			@RequestPart(value = "birthCertificate", required = false) MultipartFile birthCertificate,
 			@RequestPart(value = "lastResult", required = false) MultipartFile lastResult,
 			@RequestPart(value = "parentAadhar", required = false) MultipartFile parentAadhar,
@@ -245,12 +246,12 @@ public class GeneralAdmissionController {
 		  variables.put("motherName", motherName);
 		  variables.put("mobileNo", mobileNo);
 		  variables.put("email", email);
-	  
+		  variables.put("preferredSubject", preferredSubject);
 		
 		  if(type.equals("general")) { 
 			  GeneralAdmission createdAdmission = new
 		  GeneralAdmission(firstName,lastName, gender,dateOfBirth,
-		  admissionClass,fatherName, motherName, mobileNo, email, type, "", "", "","",
+		  admissionClass,preferredSubject,fatherName, motherName, mobileNo, email, type, "", "", "","",
 		  "", "","", "", "","");
 		  
 			  generalAdmissionRepository.save(createdAdmission);
@@ -319,7 +320,7 @@ public class GeneralAdmissionController {
 		  storageService.uploadFileOnAzure(sssmid, sssmiN+"."+sssmiT); 
 		  
 		  GeneralAdmission createdAdmission = new GeneralAdmission(firstName,lastName,
-		  gender,dateOfBirth, admissionClass,fatherName, motherName, mobileNo, email,
+		  gender,dateOfBirth, admissionClass,preferredSubject,fatherName, motherName, mobileNo, email,
 		  type, pen, birthC, lastR,parentA, studentA, sssmi, bankD, castC, transferC,
 		  profileP);
 		  generalAdmissionRepository.save(createdAdmission);
