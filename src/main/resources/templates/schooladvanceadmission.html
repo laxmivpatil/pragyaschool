@@ -14,6 +14,9 @@
         <li>Full Name: <span th:text="${firstName} + ' ' + ${lastName}"></span></li>
         <li>Date of Birth: <span th:text="${dateOfBirth}"></span></li>
         <li>Class Applying For: <span th:text="${admissionClass}"></span></li>
+        <li th:if="${admissionClass == 'Class 11th' || admissionClass == 'Class 12th'}">
+            Subjects: <span th:text="${preferredSubject}"></span>
+        </li>
         <li>Father's Name: <span th:text="${fatherName}"></span></li>
         <li>Mother's Name: <span th:text="${motherName}"></span></li>
         <li>Mobile Number: <span th:text="${mobileNo}"></span></li>
