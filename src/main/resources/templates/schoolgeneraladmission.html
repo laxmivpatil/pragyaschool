@@ -1,36 +1,100 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>New Admission Request</title>
 </head>
-<body>
-    <p>Dear Pragya School Admissions Committee,</p>
+<body style="font-family:Arial, sans-serif;background-color:#f9f9f9;margin:0;padding:0">
+    <div style="max-width:600px;margin:0 auto;background-color:#fff;padding:25px 20px;border-radius:10px">
+        <!-- Header Section -->
+        <div style="text-align:center;padding-bottom:25px">
+            <img src="https://satyaprofilestorage.blob.core.windows.net/pragyaschool/Birth_Certificate 1727699975577.png?sv=2020-10-02&st=2024-09-30T12%3A34%3A37Z&se=2099-01-01T00%3A00%3A00Z&sr=b&sp=r&sig=Lc%2ByX%2BRcwyx7JVwR8cvxC3FY%2BEbRy7Z%2FWbIdseEsn20%3D" alt="Pragya Girls School">
+        </div>
 
-    <p>We are pleased to inform you that a new admission request has been received for the academic year 2024.</p>
-    
-    <p>Details of the applicant are as follows:</p>
-    
-    <ul>
-        <li>Full Name: <span th:text="${firstName} + ' ' + ${lastName}"></span></li>
-        <li>Date of Birth: <span th:text="${dateOfBirth}"></span></li>
-        <li>Class Applying For: <span th:text="${admissionClass}"></span></li>
-         <li th:if="${admissionClass == 'Class 11th' || admissionClass == 'Class 12th'}">
-            Subjects: <span th:text="${preferredSubject}"></span>
-        </li>
-        <li>Father's Name: <span th:text="${fatherName}"></span></li>
-        <li>Mother's Name: <span th:text="${motherName}"></span></li>
-        <li>Mobile Number: <span th:text="${mobileNo}"></span></li>
-        <li>Email Address: <span th:text="${email}"></span></li>
-    </ul>
-    
-    <p>Please review the details. If further information or clarification is required, please feel free to contact us.</p>
-    
-    <p>Thank you for considering this admission request.</p>
-    
-    <p>Best regards,<br/>
-        <span th:text="${firstName} + ' ' + ${lastName}"></span><br/>
-        <span th:text="${mobileNo}"></span>
-    </p>
+        <!-- Thank You Image -->
+        <div style="text-align:center;padding:30px 0;background:#fafafa;border-radius:22px">
+            <img src="https://satyaprofilestorage.blob.core.windows.net/pragyaschool/Birth_Certificate 1727698402470.png?sv=2020-10-02&st=2024-09-30T12%3A08%3A49Z&se=2099-01-01T00%3A00%3A00Z&sr=b&sp=r&sig=khgQ2ddxjgQRt21xXWPHspjQt43EZXyFL00Aj9zTgBU%3D" alt="Thank You" style="max-width: 250px">
+        </div>
+
+        <!-- Main Content -->
+        <div style="padding:20px;color:#333">
+            <p style="font-weight:bold;line-height:1.6">Dear Pragya School Admissions Committee,</p>
+            <p style="line-height:1.6">We are pleased to inform you that a new admission request has been received for the academic year 2024.</p>
+            <p style="font-weight:bold;margin-bottom:0;line-height:1.6">Details of the applicant are as follows:</p>
+
+            <!-- Applicant Details -->
+            <div style="margin-bottom:20px">
+                <div style="display:flex;gap:20px">
+                    <div style="flex:1">
+						<p style="margin:20px 0 8px 0;line-height:1.6">First name</p>
+						<span style="background:#f5f2fa;display:block;padding:15px;border-radius:9px;font-weight:bold" th:text="${firstName}"></span>
+					</div>
+					<div style="flex:1">
+						<p style="margin:20px 0 8px 0;line-height:1.6" >Last name</p>
+						<span style="background:#f5f2fa;display:block;padding:15px;border-radius:9px;font-weight:bold"  th:text="${lastName}"></span>
+					</div>
+                </div>
+				<div style="display:flex;gap:20px">
+                    <div style="flex:1">
+						<p style="margin:20px 0 8px 0;line-height:1.6">Student date of birth</p>
+						<span style="background:#f5f2fa;display:block;padding:15px;border-radius:9px;font-weight:bold" th:text="${dateOfBirth}"></span>
+					</div>
+					<div style="flex:1">
+						<p style="margin:20px 0 8px 0;line-height:1.6">What class do you want to Admit?</p>
+						<span style="background:#f5f2fa;display:block;padding:15px;border-radius:9px;font-weight:bold" th:text="${admissionClass}"></span>
+					</div>
+                </div>
+				<div style="display:flex;gap:20px">
+                    <div style="flex:1">
+						<p style="margin:20px 0 8px 0;line-height:1.6">Father's name</p>
+						<span style="background:#f5f2fa;display:block;padding:15px;border-radius:9px;font-weight:bold" th:text="${fatherName}"></span>
+					</div>
+					<div style="flex:1">
+						<p style="margin:20px 0 8px 0;line-height:1.6">Mother's name</p>
+						<span style="background:#f5f2fa;display:block;padding:15px;border-radius:9px;font-weight:bold" th:text="${motherName}"></span>
+					</div>
+                </div>
+				<div style="display:flex;gap:20px">
+                    <div style="flex:1">
+						<p style="margin:20px 0 8px 0;line-height:1.6">Mobile number</p>
+						<span style="background:#f5f2fa;display:block;padding:15px;border-radius:9px;font-weight:bold" th:text="${mobileNo}"></span>
+					</div>
+					<div style="flex:1">
+						<p style="margin:20px 0 8px 0;line-height:1.6">Email address</p>
+						<span style="background:#f5f2fa;display:block;padding:15px;border-radius:9px;font-weight:bold" th:text="${email}"></span>
+					</div>
+                </div>
+            </div>
+
+            <p style="line-height:1.6">Please review the details. If further information or clarification is required, please feel free to contact us.</p>
+            <p style="line-height:1.6">Thank you for considering this admission request.</p>
+            
+            <div style="margin-top:40px">
+                <p style="margin-bottom:0;font-weight:bold;line-height:1.6">Best regards,</p>
+                <p style="margin-bottom:0;margin-top:0;font-weight:bold;line-height:1.6"  th:text="${firstName} + ' ' + ${lastName}"></p>
+                <p style="margin-top:0;font-weight:bold;line-height:1.6" th:text="${mobileNo}"></p>
+            </div>
+        </div>
+
+        <!-- Footer Section -->
+        <div style="text-align:center;background-color:#f7f6d4;padding:20px;border-radius:20px 20px 10px 10px;color:#555;margin:0 -20px -25px">
+            <p style="margin-bottom:25px;line-height:1.6">You are receiving this email because you opted in via our website.</p>
+            <p style="margin-bottom:25px;line-height:1.6"><strong>Contact info</strong><br>
+                <span style="display:inline-block;margin:8px 0">info@pragyagirlsschool.com</span><br><strong>0731-2847332, 0731-2492431</strong></p>
+            <p style="margin-bottom:25px;line-height:1.6">Bhicholi Mardana<br>Indore, Madhya Pradesh</p>
+            <p style="text-decoration:underline">Unsubscribe</p>
+
+            <!-- Social Icons -->
+            <div style="margin-top:35px">
+                <a href="https://www.facebook.com/PragyaGS/" target="_blank" style="color:#555;text-decoration:none"><img src="https://satyaprofilestorage.blob.core.windows.net/pragyaschool/Last_Year_Result 1727699977159.png?sv=2020-10-02&st=2024-09-30T12%3A34%3A37Z&se=2099-01-01T00%3A00%3A00Z&sr=b&sp=r&sig=pc8HPfutcnyAifnbzg27dj6VGQx94O%2BYcXaGgSloTkg%3D" alt="Facebook" style="width:24px;margin: 0 10px;height:22px"></a>
+                <a href="https://www.instagram.com/pragyagirlsschool_indore/" target="_blank" style="color:#555;text-decoration:none"><img src="https://satyaprofilestorage.blob.core.windows.net/pragyaschool/Parent_Aadhar 1727699977212.png?sv=2020-10-02&st=2024-09-30T12%3A34%3A37Z&se=2099-01-01T00%3A00%3A00Z&sr=b&sp=r&sig=7NyVpLV1ldqTNm3RfmfsYUwktu%2FIqFsSTbB7PdJXpSs%3D" alt="Instagram" style="width:24px;margin: 0 10px;height:22px"></a>
+            </div>
+            <div style="text-align:center;padding-top:25px">
+                <img src="https://satyaprofilestorage.blob.core.windows.net/pragyaschool/Birth_Certificate 1727699975577.png?sv=2020-10-02&st=2024-09-30T12%3A34%3A37Z&se=2099-01-01T00%3A00%3A00Z&sr=b&sp=r&sig=Lc%2ByX%2BRcwyx7JVwR8cvxC3FY%2BEbRy7Z%2FWbIdseEsn20%3D" alt="Pragya Girls School">
+            </div>
+        </div>
+    </div>
 </body>
 </html>

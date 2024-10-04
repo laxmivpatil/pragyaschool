@@ -1,48 +1,165 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>New Admission Request</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Form</title>
 </head>
-<body>
-    <p>Dear Pragya School Admissions Committee,</p>
+<body style="font-family:Arial, sans-serif;background-color:#f9f9f9;margin:0;padding:0">
+    <div style="max-width:600px;margin:0 auto;background-color:#fff;padding:25px 20px;border-radius:10px">
+        <!-- Header Section -->
+        <div style="text-align:center;padding-bottom:25px">
+     <!--       <img src="https://satyaprofilestorage.blob.core.windows.net/pragyaschool/Birth_Certificate 1727699975577.png?sv=2020-10-02&st=2024-09-30T12%3A34%3A37Z&se=2099-01-01T00%3A00%3A00Z&sr=b&sp=r&sig=Lc%2ByX%2BRcwyx7JVwR8cvxC3FY%2BEbRy7Z%2FWbIdseEsn20%3D" alt="Pragya Girls School">
+     -->
+         <img  src="cid:logoImage" alt="Pragya Girls School">
+ 
+      </div>
 
-    <p>We are pleased to inform you that a new admission request has been received for the academic year 2024.</p>
+        <!-- Thank You Image -->
+        <div style="text-align:center;padding:30px 0;background:#fafafa;border-radius:22px">
+         <!--     <img src="https://satyaprofilestorage.blob.core.windows.net/pragyaschool/Birth_Certificate 1727698402470.png?sv=2020-10-02&st=2024-09-30T12%3A08%3A49Z&se=2099-01-01T00%3A00%3A00Z&sr=b&sp=r&sig=khgQ2ddxjgQRt21xXWPHspjQt43EZXyFL00Aj9zTgBU%3D" alt="Thank You" style="max-width: 250px">
+  -->
+   <img src="cid:thankyouImage" alt="Thank You" style="max-width: 250px">
 
-    <p>Details of the applicant are as follows:</p>
-    <ul>
-        <li>Full Name: <span th:text="${firstName} + ' ' + ${lastName}"></span></li>
-        <li>Date of Birth: <span th:text="${dateOfBirth}"></span></li>
-        <li>Class Applying For: <span th:text="${admissionClass}"></span></li>
-        <li th:if="${admissionClass == 'Class 11th' || admissionClass == 'Class 12th'}">
-            Subjects: <span th:text="${preferredSubject}"></span>
-        </li>
-        <li>Father's Name: <span th:text="${fatherName}"></span></li>
-        <li>Mother's Name: <span th:text="${motherName}"></span></li>
-        <li>Mobile Number: <span th:text="${mobileNo}"></span></li>
-        <li>Email Address: <span th:text="${email}"></span></li>
-        <li>PEN: <span th:text="${pen}"></span></li>
-    </ul>
+        </div>
 
-    <p>Attached documents:</p>
-    <ul>
-        <li>Birth Certificate</li>
-        <li>Previous Year's Result</li>
-        <li>Parent's Aadhar Card</li>
-        <li>Student's Aadhar Card</li>
-        <li>Bank Documents</li>
-        <li>Caste Certificate</li>
-        <li>Transfer Certificate</li>
-        <li>Profile Picture</li>
-    </ul>
+        <!-- Main Content -->
+        <div style="padding:20px;color:#333">
+            <p style="font-weight:bold;line-height:1.6">Dear Pragya School Admissions Committee,</p>
+            <p style="line-height:1.6">We are pleased to inform you that a new admission request has been received for the academic year 2024.</p>
+            <p style="font-weight:bold;margin-bottom:0;line-height:1.6">Details of the applicant are as follows:</p>
 
-    <p>Please review the details and documents attached. If further information or clarification is required, please feel free to contact us.</p>
+            <!-- Applicant Details -->
+            <div style="margin-bottom:20px">
+                <div>
+                    <div style="width:48%;display:inline-block;margin-right:15px">
+						<p style="margin:20px 0 8px 0;line-height:1.6">First name</p>
+						<div style="background:#f5f2fa;padding:15px;border-radius:9px;font-weight:bold" th:text="${firstName}"></div>
+					</div>
+					<div style="width:48%;display:inline-block">
+						<p style="margin:20px 0 8px 0;line-height:1.6">Last name</p>
+						<div style="background:#f5f2fa;padding:15px;border-radius:9px;font-weight:bold" th:text="${lastName}"></div>
+					</div>
+                </div>
+				<div>
+                    <div style="width:48%;display:inline-block;margin-right:15px">
+						<p style="margin:20px 0 8px 0;line-height:1.6">Student date of birth</p>
+						<div style="background:#f5f2fa;padding:15px;border-radius:9px;font-weight:bold"  th:text="${dateOfBirth}"></div>
+					</div>
+					<div style="width:48%;display:inline-block">
+						<p style="margin:20px 0 8px 0;line-height:1.6">What class do you want to Admit?</p>
+						<div style="background:#f5f2fa;padding:15px;border-radius:9px;font-weight:bold" th:text="${admissionClass}"></div>
+					</div>
+                </div>
+				<div>
+                    <div style="width:48%;display:inline-block;margin-right:15px">
+						<p style="margin:20px 0 8px 0;line-height:1.6">Father's name</p>
+						<div style="background:#f5f2fa;padding:15px;border-radius:9px;font-weight:bold" th:text="${fatherName}"></div>
+					</div>
+					<div style="width:48%;display:inline-block">
+						<p style="margin:20px 0 8px 0;line-height:1.6">Mother's name</p>
+						<div style="background:#f5f2fa;padding:15px;border-radius:9px;font-weight:bold" th:text="${motherName}"></div>
+					</div>
+                </div>
+				<div>
+                    <div style="width:48%;display:inline-block;margin-right:15px">
+						<p style="margin:20px 0 8px 0;line-height:1.6">Mobile number</p>
+						<div style="background:#f5f2fa;padding:15px;border-radius:9px;font-weight:bold" th:text="${mobileNo}"></div>
+					</div>
+					<div style="width:48%;display:inline-block">
+						<p style="margin:20px 0 8px 0;line-height:1.6">Email address</p>
+						<div style="background:#f5f2fa;padding:15px;border-radius:9px;font-weight:bold" th:text="${email}"></div>
+					</div>
+                </div>
+                <div>
+                    <p style="margin:20px 0 8px 0;line-height:1.6">P.E.N (Permanent Education Number) of student from previous school</p>
+                    <span style="background:#f5f2fa;display:block;padding:15px;border-radius:9px;font-weight:bold" <span th:text="${pen}"></span>
+                </div>
+            </div>
 
-    <p>Thank you for considering this admission request.</p>
+            <p style="font-weight:bold;margin:35px 0 0;line-height:1.6">Attached documents:</p>
+            <div style="margin-bottom:35px">
+                <div style="width:48%;display:inline-block;margin-right:15px">
+                    <div style="margin-top:20px">
+                        <span style="display:inline-block;background:#707070;height:10px;width:10px;border-radius:50%;margin-right:7px;vertical-align:top;margin-top:4px"></span>
+                        <span style="width:90%;display:inline-block">Birth Certificate</span>
+                    </div>
+                    <div style="margin-top:20px">
+                        <span style="display:inline-block;background:#707070;height:10px;width:10px;border-radius:50%;margin-right:7px;vertical-align:top;margin-top:4px"></span>
+                        <span style="width:90%;display:inline-block">Aadhaar Card of Parent</span>
+                    </div>
+                    <div style="margin-top:20px">
+                        <span style="display:inline-block;background:#707070;height:10px;width:10px;border-radius:50%;margin-right:7px;vertical-align:top;margin-top:4px"></span>
+                        <span style="width:90%;display:inline-block">Upload copy of SSSMID (Samagra ID)</span>
+                    </div>
+                    <div style="margin-top:20px">
+                        <span style="display:inline-block;background:#707070;height:10px;width:10px;border-radius:50%;margin-right:7px;vertical-align:top;margin-top:4px"></span>
+                        <span style="width:90%;display:inline-block">Copy of Caste Certificate for SC, ST, OBC</span>
+                    </div>
+                </div>
+                <div style="width:48%;display:inline-block">
+                    <div style="margin-top:20px">
+                        <span style="display:inline-block;background:#707070;height:10px;width:10px;border-radius:50%;margin-right:7px;vertical-align:top;margin-top:4px"></span>
+                        <span style="width:90%;display:inline-block">Last Class Result</span>
+                    </div>
+                    <div style="margin-top:20px">
+                        <span style="display:inline-block;background:#707070;height:10px;width:10px;border-radius:50%;margin-right:7px;vertical-align:top;margin-top:4px"></span>
+                        <span style="width:90%;display:inline-block">Aadhaar card of Student</span>
+                    </div>
+                    <div style="margin-top:20px">
+                        <span style="display:inline-block;background:#707070;height:10px;width:10px;border-radius:50%;margin-right:7px;vertical-align:top;margin-top:4px"></span>
+                        <span style="width:90%;display:inline-block">Cancelled Cheque or a Bank Passbook</span>
+                    </div>
+                    <div style="margin-top:20px">
+                        <span style="display:inline-block;background:#707070;height:10px;width:10px;border-radius:50%;margin-right:7px;vertical-align:top;margin-top:4px"></span>
+                        <span style="width:90%;display:inline-block">Transfer Certificate from the Previous School</span>
+                    </div>
+                </div>
+            </div>
 
-    <p>Best regards,<br/>
-    <span th:text="${firstName} + ' ' + ${lastName}"></span><br/>
-    <span th:text="${mobileNo}"></span>
-    </p>
+            <p style="line-height:1.6">Please review the details and documents attached. If further information or clarification is required, please feel free to contact us.</p>
+            <p style="line-height:1.6">Thank you for considering this admission request.</p>
+            
+            <div style="margin-top:40px">
+                <p style="margin-bottom:0;font-weight:bold;line-height:1.6">Best regards,</p>
+                <p style="margin-bottom:0;margin-top:0;font-weight:bold;line-height:1.6" th:text="${firstName} + ' ' + ${lastName}"></p>
+                <p style="margin-top:0;font-weight:bold;line-height:1.6" th:text="${mobileNo}"></p>
+            </div>
+        </div>
+
+        <!-- Footer Section -->
+        <div style="text-align:center;background-color:#f7f6d4;padding:20px;border-radius:20px 20px 10px 10px;color:#555;margin:0 -20px -25px">
+            <p style="margin-bottom:25px;line-height:1.6">You are receiving this email because you opted in via our website.</p>
+            <p style="margin-bottom:25px;line-height:1.6"><strong>Contact info</strong><br>
+                <span style="display:inline-block;margin:8px 0">info@pragyagirlsschool.com</span><br><strong>0731-2847332, 0731-2492431</strong></p>
+            <p style="margin-bottom:25px;line-height:1.6">Bhicholi Mardana<br>Indore, Madhya Pradesh</p>
+            <p style="text-decoration:underline">Unsubscribe</p>
+
+            <!-- Social Icons -->
+            <div style="margin-top:35px">
+              <a href="https://www.facebook.com/PragyaGS/" target="_blank" style="color:#555;text-decoration:none">
+				 <!-- <img src="https://satyaprofilestorage.blob.core.windows.net/pragyaschool/Last_Year_Result 1727699977159.png?sv=2020-10-02&st=2024-09-30T12%3A34%3A37Z&se=2099-01-01T00%3A00%3A00Z&sr=b&sp=r&sig=pc8HPfutcnyAifnbzg27dj6VGQx94O%2BYcXaGgSloTkg%3D" alt="Facebook" style="margin: 0 10px;height:22px">-->
+				   <img  src="cid:fbImage" alt="Facebook" style="margin: 0 10px;height:22px">
+				 </a>
+                <a href="https://www.instagram.com/pragyagirlsschool_indore/" target="_blank" style="color:#555;text-decoration:none">
+				<!-- 	<img src="https://satyaprofilestorage.blob.core.windows.net/pragyaschool/Parent_Aadhar 1727699977212.png?sv=2020-10-02&st=2024-09-30T12%3A34%3A37Z&se=2099-01-01T00%3A00%3A00Z&sr=b&sp=r&sig=7NyVpLV1ldqTNm3RfmfsYUwktu%2FIqFsSTbB7PdJXpSs%3D" alt="Instagram" style="width:24px;margin: 0 10px;height:22px">  -->
+				  <img  src="cid:instaImage" alt="Instagram" style="width:24px;margin: 0 10px;height:22px">
+				</a>
+                     </div>
+
+            <div style="text-align:center;padding-top:25px">
+    <!--              <img src="https://satyaprofilestorage.blob.core.windows.net/pragyaschool/Birth_Certificate 1727699975577.png?sv=2020-10-02&st=2024-09-30T12%3A34%3A37Z&se=2099-01-01T00%3A00%3A00Z&sr=b&sp=r&sig=Lc%2ByX%2BRcwyx7JVwR8cvxC3FY%2BEbRy7Z%2FWbIdseEsn20%3D" alt="Pragya Girls School">    -->
+      <img  src="cid:logoImage" alt="Pragya Girls School">
+          </div>
+        </div>
+    </div>
 </body>
 </html>
+
+
+
+
+
+
+

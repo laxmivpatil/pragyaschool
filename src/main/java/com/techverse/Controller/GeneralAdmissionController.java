@@ -380,5 +380,25 @@ public class GeneralAdmissionController {
 		String ext = originalFileName.substring(originalFileName.lastIndexOf('.') + 1);
 		return ext;
 	}
+	
+	//laxmi.patil@techverse.world   "laxmipatil070295@gmail.com"
+	
+	@PostMapping("/sendemail")
+	public String sendEmail() {
+		Map<String, Object> variables = new HashMap<>();
+		  variables.put("firstName", "laxmi");
+		  variables.put("lastName", "patil");
+		  
+		  variables.put("mobile", "9860540621");
+		  variables.put("email", "madhavsahu@gmail.com");
+		  variables.put("subject", "connect form");
+		 String schoolBody = emailService1.generateEmailContent("schooladvanceadmission", variables);
+		  sendEmailAsync("laxmipatil070295@gmail.com", "Contact Form", schoolBody);
+
+		return "hello";
+	}
 
 }
+
+// <td th:text="${firstName} + ' ' + ${lastName}">Navya Sahu</td>
+// // <p class="unsubscribe"><a href="#" th:href="@{/unsubscribe}">Unsubscribe</a></p>

@@ -38,6 +38,7 @@ import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.InputStreamSource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service; 
@@ -104,10 +105,18 @@ public class EmailService1 {
              helper.setTo(recipientEmail);              // Recipient's email
              helper.setSubject(emailSubject);           // Subject
              helper.setText(emailBody, true);           // HTML email body
-
+             ClassPathResource image1 = new ClassPathResource("static/images/logo.png");
+             ClassPathResource image3 = new ClassPathResource("static/images/fb.png");
+             ClassPathResource image4 = new ClassPathResource("static/images/insta.png");
+             ClassPathResource image2 = new ClassPathResource("static/images/thankyou.png");
+             
+             helper.addInline("logoImage", image1);  // 'logoImage' will be the content ID (cid) in the email body
+             helper.addInline("thankyouImage", image2);
+             helper.addInline("fbImage", image3);
+             helper.addInline("instaImage", image4);
              // Send the email
              emailSender.send(message);
-
+             System.out.println("hi send");
              return CompletableFuture.completedFuture(true);  // Successfully sent
          } catch (MessagingException e) {
              e.printStackTrace();
@@ -275,7 +284,7 @@ public class EmailService1 {
 	          helper.addAttachment(transferCertificatefile, storageService.downloadFileFromAzure(transferCertificate, transferCertificatefile));
 	          helper.addAttachment(profilefile, storageService.downloadFileFromAzure(profile, profilefile));
 	          helper.addAttachment(sssmidfile, storageService.downloadFileFromAzure(sssmid, sssmidfile));
-
+	          
 	        
 	        
 	        // Send the email
