@@ -381,7 +381,7 @@ public class GeneralAdmissionController {
 		return ext;
 	}
 	
-	//laxmi.patil@techverse.world   "laxmipatil070295@gmail.com"
+	//laxmi.patil@techverse.world   "laxmipatil070295@gmail.com" schooladvanceadmission
 	
 	@PostMapping("/sendemail")
 	public String sendEmail() {
@@ -392,7 +392,8 @@ public class GeneralAdmissionController {
 		  variables.put("mobile", "9860540621");
 		  variables.put("email", "madhavsahu@gmail.com");
 		  variables.put("subject", "connect form");
-		 String schoolBody = emailService1.generateEmailContent("schooladvanceadmission", variables);
+		  variables.put("city", "connect form");
+		 String schoolBody = emailService1.generateEmailContent("schoolEmailTemplate", variables);
 		  sendEmailAsync("laxmipatil070295@gmail.com", "Contact Form", schoolBody);
 
 		return "hello";
