@@ -105,6 +105,9 @@ public class EmailService1 {
              helper.setTo(recipientEmail);              // Recipient's email
              helper.setSubject(emailSubject);           // Subject
              helper.setText(emailBody, true);           // HTML email body
+             
+             
+            	 System.out.println("hi send connect");
              ClassPathResource image1 = new ClassPathResource("static/images/logo.png");
              ClassPathResource image3 = new ClassPathResource("static/images/fb.png");
              ClassPathResource image4 = new ClassPathResource("static/images/insta.png");
@@ -114,6 +117,7 @@ public class EmailService1 {
              helper.addInline("thankyouImage", image2);
              helper.addInline("fbImage", image3);
              helper.addInline("instaImage", image4);
+               
              // Send the email
              emailSender.send(message);
              System.out.println("hi send");
